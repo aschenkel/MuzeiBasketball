@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "430634340942",
+    "firebase_url": "https://nbamuzei.firebaseio.com",
+    "project_id": "nbamuzei",
+    "storage_bucket": "nbamuzei.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430634340942:android:a450933b6bcc82cf",
+        "android_client_info": {
+          "package_name": "com.example.axel.nbamuzei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430634340942-4eqf7or5figv2guqs72m7eisvk16s6au.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP77AUNK5QKkQ2A-xwi2wP_R2GFbikqb4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
