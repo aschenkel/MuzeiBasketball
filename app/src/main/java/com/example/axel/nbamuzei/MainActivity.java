@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        AddImages();
 
     }
 
@@ -24,28 +26,32 @@ public class MainActivity extends Activity {
     }
 
     private void AddImages(){
-        int id =2;
+        int id =1;
         ArrayList<NBAImage> list = new ArrayList<>();
         list.add(new NBAImage("http://1.bp.blogspot.com/-KZXWHcf08jI/Tb-ppoY2G8I/AAAAAAAAAp4/XJsZTHuB4bM/s1600/Series+MVP+and+guard+Michael+Jordan+of+the+Chicago+Bulls+hugs+the+championship+trophy+as+the+Bulls+defeated+the+Los+Angeles+Lakers%252C+1991.jpg","Michael Jordan hugs his first NBA Trophy on 1991",""));
-        list.add(new NBAImage("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQSDPBECf_9vp2Q1tR30LvOcbsgNbiH5jvsPZ6vFCP0OVFsE0Nl","Allen Iverson steps over Tyron Lue during the 2001 NBA Finals",""));
+        list.add(new NBAImage("http://wallpapercave.com/wp/Tr6LF9p.jpg", "Lebron James celebrating",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/c8/47/89/c847892f778ea55bf3e4b8dd71d64c2c.jpg","Allen Iverson steps over Tyron Lue during the 2001 NBA Finals",""));
         list.add(new NBAImage("http://ww1.hdnux.com/photos/24/35/52/5364368/3/rawImage.jpg","Tim Duncan at College",""));
         list.add(new NBAImage("https://i.ytimg.com/vi/2uUpiDYd0Ho/maxresdefault.jpg","Devin Booker of the Phoenix Suns",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/be/e6/12/bee6126e1b8ea8bc37c4ba5efb877b46.jpg","Magic goes by Jordan",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/21/a8/72/21a872f7167103f096fedbc72d0e0bc9.jpg","Vince Carter at the historic 2000 Dunk Contest",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/15/75/b1/1575b1c6e5229578d71e40825047f8fb.jpg","Charles Barkley of the Philadelfia 76ers",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/3b/03/ac/3b03ac8db12d6a6c7c6879adaf486693.jpg","Karl Malone is having his shirt stretched",""));
         list.add(new NBAImage("http://68.media.tumblr.com/93bd04b0209327fbfc0e16a78fa21b12/tumblr_nu29deTPbd1ruj0bpo1_1280.jpg", "Shaquille O'Neal and Kobe Bryant talk before a game in 1999","nba.tumblr"));
-        list.add(new NBAImage("http://68.media.tumblr.com/32404e2ea4e2841bd8d3ef2a7d0be01c/tumblr_oe6ep2MPox1ruj0bpo1_1280.jpg", "Dwight Howard poses during media day","nba.tumblr"));
-        list.add(new NBAImage("http://ww3.hdnux.com/photos/36/10/11/7897702/9/920x920.jpg", "Young Gregg Popovich",""));
         list.add(new NBAImage("http://68.media.tumblr.com/345da4546d025461fd4fd0143fe69315/tumblr_npubjgnG3j1ruj0bpo1_1280.jpg", "Klay Thompson reacts against the Cleveland Cavaliers during the 2015 NBA Finals","nba.tumblr"));
-        list.add(new NBAImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeYywlQNVhOD7OVNfSyMMzN30XDHIdR43rTNpV_A2CcMQ7n0y3GA", "Young Paul Pierce",""));
-        list.add(new NBAImage("http://wallpapercave.com/wp/Tr6LF9p.jpg", "Lebron James celebrating",""));
-        list.add(new NBAImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdwj-lr-mL6wdXzpCg05_EV5ep7RcoqZOL3Uhusuun7mxT0_pnpg", "Young Kevin Garnett",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/d8/84/3b/d8843bc15491a596e7ccf16981014176.jpg","Young Drazen Petrovic",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/d8/b8/f3/d8b8f39dae63d451de9d644a93e1e9c4.jpg","Kobe Bryant dunking artwork",""));
+        list.add(new NBAImage("http://digo.do/wp-content/uploads/2017/03/dt.common.streams.StreamServer.jpeg","7 ft 7 in Manute Bol",""));
         list.add(new NBAImage("http://ballislife.com/wp-content/uploads/2012/06/oscar-robertson-cincinnati.jpg","Oscar Robertson had a lot of style",""));
         list.add(new NBAImage("http://68.media.tumblr.com/e8755cd090d133180f4cd75f3a1de861/tumblr_nqtnaluVVn1ruj0bpo1_1280.jpg", "Vince Carter and Tracy McGrady pose for a portrait together during the 2000 NBA All-Star Weekend","nba.tumblr"));
         list.add(new NBAImage("http://68.media.tumblr.com/4a0149a7c6d659de58faee98ab147bb1/tumblr_nvlkh5fT181ruj0bpo1_1280.jpg", "Jae Crowder of the Boston Celtics poses for media day on September 25, 2015","nba.tumblr"));
         list.add(new NBAImage("http://68.media.tumblr.com/05f2849c472e096cbaad9c41fb13d2e1/tumblr_o6nsm8cU8q1ruj0bpo1_1280.jpg", "Dennis Rodman’s hair during Game Four of the 1996 NBA Finals against the Seattle SuperSonics","nba.tumblr"));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/ec/91/33/ec9133b953327ebff6c3fe19401305d7.jpg","60's and 70's LA Lakers star Jerry West ",""));
         list.add(new NBAImage("http://allswalls.com/images/michael-jordan-selective-coloring-wallpaper-1.jpg", "The Shot by Michael Jordan",""));
         list.add(new NBAImage("http://68.media.tumblr.com/5ab8f9ef07fe9ee6f9de44365efd3524/tumblr_o5ldd9khKV1ruj0bpo1_1280.jpg", "Kobe Bryant poses with the NBA Championship trophy of the 2001 NBA Finals","nba.tumblr"));
         list.add(new NBAImage("http://sports.cbsimg.net/images/visual/whatshot/Dikembe_021415.jpg","Dikembe Mutombo 'not in my house'",""));
         list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/736x/7d/05/f4/7d05f4b3292b2e1c261d3e13ed4fb596.jpg","Bill Laimbeer on a magazine making reference to the foul called on game 7 of the 1990 NBA FINALS against the Lakers",""));
-        list.add(new NBAImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScOdmwiYDL1yaD2_k-0VxgpLZgdCYuwF9ISaT8EITNLB2DuLHE6A", "Young Michael Jordan",""));
+        list.add(new NBAImage("http://ww3.hdnux.com/photos/36/10/11/7897702/9/920x920.jpg", "Young Gregg Popovich",""));
         list.add(new NBAImage("http://go.globe.com.ph/content/dam/story/articles/sports-and-fitness/2017/february/nba-all-star-ready/Smitty%27s%20Sports%20Machine.jpg","Dwight Howard flying like Superman",""));
         list.add(new NBAImage("http://68.media.tumblr.com/956e5cc84f3caa233b6a054fc785dc78/tumblr_nt1a1pUD8Y1ruj0bpo1_1280.jpg", "Larry Bird and Patrick Ewing of the Dream Team during the 1992 Olympics in Barcelona","nba.tumblr"));
         list.add(new NBAImage("http://68.media.tumblr.com/9fb5ccf37c7b0c986735b9fd186c2562/tumblr_nlonhn9stg1ruj0bpo1_1280.jpg", "James Harden 'cooking' on March 19, 2015 in Houston","nba.tumblr"));
@@ -58,7 +64,7 @@ public class MainActivity extends Activity {
         list.add(new NBAImage("https://img.vavel.com/b/Towns.jpg","Karl-Anthony Towns celebrating a 3 pointer",""));
         list.add(new NBAImage("http://68.media.tumblr.com/b83c35f769679d1a1ef1cc2edb082973/tumblr_nke1vmdOyB1ruj0bpo1_1280.jpg", "DeMarcus Cousins reacts after making a basket on February 25, 2015","nba.tumblr"));
         list.add(new NBAImage("http://68.media.tumblr.com/85d64e79fdf696afe557e3006b0c32fd/tumblr_ncq2p26KLq1ruj0bpo1_1280.jpg", "Nene and Marcin Gortat of the Washington Wizards pose","nba.tumblr"));
-        list.add(new NBAImage("http://3.bp.blogspot.com/-I8sg8d2sakw/UAcARszmamI/AAAAAAAADK4/qws_4bAwKXA/s1600/1-2+punch.jpeg","Karl Malone and John Stockton of the Utah Jazz",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/2a/68/20/2a6820834c4c6651701b9ebd6cc48bd0.jpg","Karl Malone and John Stockton of the Utah Jazz",""));
         list.add(new NBAImage("http://www.blogdebasket.com/files/drazen_petrovic.jpg","Drazen Petrovic driving by John Starks",""));
         list.add(new NBAImage("http://68.media.tumblr.com/4c3875056474dc387a4904b6da33f532/tumblr_njbb8uV9VL1ruj0bpo1_1280.jpg", "Tim Duncan and David Robinson during NBA All-Star Practice on February 8, 1998","nba.tumblr"));
         list.add(new NBAImage("http://68.media.tumblr.com/00c30b75593765a9cfd2beea6e4b8334/tumblr_nfyrchhJC21ruj0bpo1_1280.jpg", "Nick Young of the Los Angeles Lakers celebrates after making a three point","nba.tumblr"));
@@ -91,6 +97,7 @@ public class MainActivity extends Activity {
         list.add(new NBAImage("http://media.gq.com/photos/56ba5a91cdf2db6945d2e277/master/pass/vince-carter-dunk.jpg","Vinsanity Dunking",""));
         list.add(new NBAImage("https://images.solecollector.com/complex/image/upload/pxsmkhijswv41pqdz6f3","The Flu Game",""));
         list.add(new NBAImage("http://i.onionstatic.com/avclub/5113/21/16x9/960.jpg","Detroit Bad Boys",""));
+        list.add(new NBAImage("http://68.media.tumblr.com/32404e2ea4e2841bd8d3ef2a7d0be01c/tumblr_oe6ep2MPox1ruj0bpo1_1280.jpg", "Dwight Howard poses during media day","nba.tumblr"));
         list.add(new NBAImage("http://68.media.tumblr.com/b1c6513fd0d58e5a4fe6401f85a154ad/tumblr_mu22hlrad11ruj0bpo1_1280.jpg","Nate Robinson of the Denver Nuggets poses for a photo on Media Day on September 30, 2013","nba.tumblr"));
         list.add(new NBAImage("http://www.botherland.com/wp-content/uploads/2017/04/James-Worthy-Wallpaper-6.jpg","Big Games James Worthy",""));
         list.add(new NBAImage("http://k42.kn3.net/taringa/5/8/4/0/5/6/9/felii1/E05.jpg?2318","Kobe and Michael joking on All-Star game",""));
@@ -137,7 +144,7 @@ public class MainActivity extends Activity {
         list.add(new NBAImage("http://68.media.tumblr.com/6213ed69761f4f2e8f1abb9dc657a317/tumblr_n64tz7Fuod1ruj0bpo1_1280.jpg","Roy Hibbert looks on prior to Game 3 of the Eastern Conference Finals against the Miami Heat of the 2014 NBA Playoffs ","nba.tumblr"));
         list.add(new NBAImage("http://68.media.tumblr.com/2feddf66e6e5d144367af0a39dc82e9a/tumblr_n4jqjckeKC1ruj0bpo1_1280.jpg","Shawn Marion of the Dallas Mavericks stretches before a game against the San Antonio Spurs","nba.tumblr"));
         list.add(new NBAImage("http://68.media.tumblr.com/6cb049ecb59d25ad883ba4b1fba170b6/tumblr_n6nx6ey7sz1ruj0bpo1_1280.jpg","Tim Duncan and head coach Gregg Popovich of the San Antonio Spurs talk during practice as part of the 2014 NBA Finals","nba.tumblr"));
-        list.add(new NBAImage("http://68.media.tumblr.com/197e4f79c48c4a74e0997b6cb6183300/tumblr_n6fvtw5Bj11ruj0bpo1_1280.jpg","LeBron James defends against Paul George during Game Six of the Eastern Conference Finals on 2014","nba.tumblr"));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/e2/97/23/e2972314cd29292e89d0ca4a31d3c08a.jpg","Memorable block by LeBron James on Andre Iguodala during 2016 NBA Finals","nba.tumblr"));
         list.add(new NBAImage("http://basketballhq.com/wp-content/uploads/2015/12/Basketball-Workouts.jpg","Rajon Rondo workout",""));
         list.add(new NBAImage("http://fullyclips.com/files/2013/03/BFGPwIxCQAEa6ZL.png","DeAndre Jordan celebrating",""));
         list.add(new NBAImage("http://68.media.tumblr.com/9821ffbe3dd9719999711d420608dd91/tumblr_n4wtl83Xyp1ruj0bpo1_1280.jpg","LeBron James hugs Michael Jordan after defeating the Charlotte Bobcats in Game Four of the 2014 Eastern Conference Quarterfinals","nba.tumblr"));
@@ -156,6 +163,7 @@ public class MainActivity extends Activity {
         list.add(new NBAImage("http://68.media.tumblr.com/11cfe62d1d0a296a1b3707b06c9e04c4/tumblr_mwipv2syr21ruj0bpo1_1280.jpg","Z Bo streching","nba.tumblr"));
         list.add(new NBAImage("http://68.media.tumblr.com/040b3b9045c126a39862b895bf35d311/tumblr_n1vcbpyfcI1ruj0bpo1_1280.jpg","The jersey of Allen Iverson of the Philadelphia 76ers was retired on March 1, 2014 ","nba.tumblr"));
         list.add(new NBAImage("http://s1.dmcdn.net/LmkJN/1280x720-lXH.jpg","The Dream Team having fun",""));
+        list.add(new NBAImage("http://i2.cdn.cnn.com/cnnnext/dam/assets/140107124402-rodman-05-horizontal-large-gallery.jpg","Dennis Rodman dives for a lose ball",""));
         list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/originals/e9/55/17/e95517965d125cd9ae31426fcdfedd38.jpg","Chris Webber dunking",""));
         list.add(new NBAImage("https://i.ytimg.com/vi/L_F0aTb7ar8/maxresdefault.jpg","Young Jason Kid",""));
         list.add(new NBAImage("http://33forever.tripod.com/sitebuildercontent/sitebuilderpictures/ewingnew.jpg","Patrick Ewing",""));
@@ -183,6 +191,7 @@ public class MainActivity extends Activity {
 
         list.add(new NBAImage("http://espngrantland.files.wordpress.com/2014/05/allen_iverson_poster.jpg?w=694","Allen Iverson on a magazine cover",""));
         list.add(new NBAImage("http://static3.businessinsider.com/image/518d580b69beddff41000005-480/lebron-james.jpg","Lebron at highschool",""));
+        list.add(new NBAImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeYywlQNVhOD7OVNfSyMMzN30XDHIdR43rTNpV_A2CcMQ7n0y3GA", "Young Paul Pierce",""));
 
         list.add(new NBAImage("https://i.ytimg.com/vi/sgDDS-8s6ZM/maxresdefault.jpg","Karl-Anthony Towns of the Minnesota TimberWolves",""));
         list.add(new NBAImage("http://www.hoopsjunction.com/wp-content/uploads/2014/09/basketballHOF1.jpg","The Naismith Memorial Basketball Hall of Fame",""));
@@ -260,7 +269,7 @@ public class MainActivity extends Activity {
         list.add(new NBAImage("http://top101news.com/wp-content/uploads/2015/06/Chris-Paul-Hottest-Most-Popular-Sexiest-NBA-Players-e1435031661529.jpg","Chris Paul of the LA Clippers",""));
         list.add(new NBAImage("http://68.media.tumblr.com/c81ccb33c425051d9fa7d5680a7194fa/tumblr_mwmdojlnfw1ruj0bpo1_1280.jpg","Terrence Ross dunks the ball against the Philadelphia 76ers at the Wells Fargo Center on November 20, 2013","nba.tumblr"));
         list.add(new NBAImage("https://upload.wikimedia.org/wikipedia/commons/4/45/Elvin_Hayes_1975.jpeg","Elvin Hayes of the Washington Bullets",""));
-        list.add(new NBAImage("http://img.wennermedia.com/social/mj-618_348_the-last-word-bill-walton.jpg","Bill Walton",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/a9/c8/69/a9c869f08b3b8b81edf607715d108b43.jpg","Bill Walton",""));
         list.add(new NBAImage("https://cdn-s3.si.com/s3fs-public/images/1981-Moses-Malone-Mark-Landsberger-080100596.jpg","Moses Malone getting the rebound",""));
         list.add(new NBAImage("https://ae01.alicdn.com/kf/HTB1KH4zKVXXXXX.XVXXq6xXFXXXP/2015-free-shipping-23-NBA-michael-font-b-jordan-b-font-font-b-poster-b-font.jpg","MJ",""));
         list.add(new NBAImage("http://667890af24dcf3c4ff75-3c5c7cf439b200c763d8c176f7f8a124.r52.cf2.rackcdn.com/images/images/2777/photos/large/oscar_robertson_tsl.jpg_4e12f7d761a094cd6e75d1304834104a?1363197928","Young Oscar Robertson",""));
@@ -268,9 +277,40 @@ public class MainActivity extends Activity {
         list.add(new NBAImage("http://www.10wallpaper.com/wallpaper/medium/1608/CJ_McCollum_Blazers-2016_NBA_Poster_HD_Wallpaper_medium.jpg","CJ McCollum Poster",""));
         list.add(new NBAImage("http://copicola.com/images/nba-wallpaper-hd/nba-wallpaper-hd-4.jpg","James Harden Poster",""));
         list.add(new NBAImage("https://ae01.alicdn.com/kf/HTB1S4sMKXXXXXbDXVXXq6xXFXXXo/New-HD-Paul-George-indiana-Pacers-Basketball-NBA-Art-Wall-Pictures-Canvas-fabric-cloth-Print-Poster.jpg_640x640.jpg","Paul George Poster",""));
+        list.add(new NBAImage("http://thumbnails.cbsig.net/CBS_Production_MaxPreps_VMS/2015/02/25/404356163674/JamesHardenThumb_509554_616x346.jpg","Beardless James Harden",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/17/19/dd/1719dd723b8b86de922f06934efc735a.jpg","Russell Westbrook posing",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/736x/18/0d/9a/180d9acc20169fb1badcd4abffa4bf3c.jpg","Larry Bird of the Indiana State Celtics",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/81/48/68/8148688a3004c242073538fde2ce25f2.jpg","'The reignman' Shawn Kemp",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/29/df/02/29df021ec00be1a811ab1fca871cff50.jpg","Dirk Nowitzki, Steve Nash and Michael Finley of the Dallas Mavericks",""));
+        list.add(new NBAImage("https://johnnycigarsports247.files.wordpress.com/2016/08/spud-1.jpeg","Spud Webb 1986 NBA Slam Dunk Champion",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/6c/18/53/6c1853dfccd11bd055057998f484072c.jpg","Dwayne Wade as a kid",""));
+        list.add(new NBAImage("http://thesportsfanjournal.com/wp-content/uploads/2013/04/michael-jordan-north-carolina.jpg","Michael Jordan at North Carolina",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/02/4e/31/024e31de1199480493957e684b2f803d.jpg","Clide Drexler",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/54/69/f6/5469f6c7c82ee2a6a690a9b2769d87c7.jpg","Grant Hill of the Detroit Pistons",""));
 
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/13/41/1a/13411a3542640e34f5e3f24fce950203.jpg","KD and TimmyD at the NBA All-Star Game",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/66/c0/2a/66c02a82fc9393c4c6148828bd0953bb.jpg","Julius Erving at the NBA Dunk Contest",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/30/a7/5c/30a75c95e69ce2e0f54bf90f3e89a029.jpg","Dennis Rodman of the Chicago Bulls",""));
 
-
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/f4/9e/c4/f49ec456adc2e44c5a9ecda5b92bb6a9.jpg","Classic Fights between the 'Bad Boys' Detroit Pistons and the Chicago Bulls",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/8d/9d/11/8d9d11d86945707d5f325109dcde36bd.jpg","The kiss and then the battle",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/f8/8d/1a/f88d1ae213e7f4243ca09baba0b548d4.jpg","Shaq attack",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/23/4b/13/234b13ad3a215aa2f6b4242beef79a6d.jpg","The Toronto Raptors at the huddle",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/14/7f/a4/147fa430e2e9a3664e69d1dbd57c6979.jpg","Patrick Ewing against David Robinson",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/5d/19/24/5d192468c473e2cf13de86f2e0c52deb.jpg","Jason Richardson at the 2003 Dunk Contest",""));
+        list.add(new NBAImage("http://img001.21cnimg.com/photos/album/20130601/m600/7EDC55F6FC6F4E57749A948C59D37D39.jpeg","Carmelo Anthony as a kid",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/4c/02/92/4c02921b77e0fa832534b6915ca30300.jpg","Legendary PG John Stockton",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/a8/28/62/a828624fdf6e17f099fe8558fc4337a0.jpg","Bill Russell & Wilt Chamberlain","Artwork by Bill Purdom"));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/26/de/71/26de71250e2046137d7a5e9722ac863e.jpg","Dominique Wilkins dunking 2 balls",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/20/44/46/204446e8b3269321327d986154d3d870.jpg","MJ hugging Kobe and Lebron artwork",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/cb/53/63/cb53636fbf67c4d384a9ac5dd21536f8.jpg","Magic gets intense with the ref",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/d3/ae/de/d3aede55f69290a5d251cc7959b03ea5.jpg","Allen Iverson Poster",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/1f/81/ec/1f81ec7aebada6b84c21682c42d687ee.jpg","Shaq and Kobe posing",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/b9/8b/67/b98b677d83f40dc236bbfc89e7131609.jpg","Kobe dunking",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/35/16/68/3516683785253e1ee98d6b67bde03a42.jpg","NBA Legends",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/de/ba/12/deba12630f9b1760c6ba73844483b93d.jpg","Dee Brown at the 2015 NBA Dunk Contest",""));
+        list.add(new NBAImage("https://s-media-cache-ak0.pinimg.com/564x/3e/1e/59/3e1e59b540701f6af58f424777492c3b.jpg","Steph Curry artwork",""));
+        list.add(new NBAImage("http://68.media.tumblr.com/215cd969d532daaa663b5c5c37afdb8e/tumblr_ofzy27RSDP1ruj0bpo1_1280.jpg","Vince Carter laughs with Paul Pierce during a game circa 1999 at the Air Canada Centre in Toronto","nba.tumblr"));
 
 
         for(NBAImage image:list){
