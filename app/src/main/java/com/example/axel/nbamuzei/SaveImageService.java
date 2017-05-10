@@ -14,19 +14,25 @@ import java.net.URL;
  * Created by axel on 09/05/17.
  */
 
-public class SaveImageToGalleryService {
+public class SaveImageService {
 
     private static Context context;
-    public static void SaveImage(String URL,Context contextParam){
+    public static void CacheImage(String URL, Context contextParam){
         //ask if there is an internet connection
         context = contextParam;
-        Toast.makeText(context,
-                "Saving Image", Toast.LENGTH_SHORT).show();
-        new saveImageToGallery().execute(URL);
+        new cacheImageFromURL().execute(URL);
 
     }
 
-    private static class saveImageToGallery extends AsyncTask<String, Void, Bitmap> {
+    public static void AddImageToGallery(Context context){
+        //Get bitmap from DB
+        Bitmap bitmap = null;
+        MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap,"", "");
+        Toast.makeText(context,
+                "Image Saved", Toast.LENGTH_SHORT).show();
+    }
+
+    private static class cacheImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
 
 
@@ -44,9 +50,8 @@ public class SaveImageToGalleryService {
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap,"", "");
-            Toast.makeText(context,
-                    "Image Saved", Toast.LENGTH_SHORT).show();
+            //SAVE IMAGE TO DB
+
         }
 
 

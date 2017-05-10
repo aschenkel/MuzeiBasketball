@@ -93,7 +93,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     private void SaveImage() {
         String url= SharedPreferencesManager.ReadSharedPrefURL(getApplicationContext());
-        SaveImageToGalleryService.SaveImage(url,getApplicationContext());
+        SaveImageService.CacheImage(url,getApplicationContext());
     }
 
 
