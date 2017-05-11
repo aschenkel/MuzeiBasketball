@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
 
 import com.example.axel.nbamuzei.DataAccess.SharedPreferencesService;
 import com.google.android.apps.muzei.api.Artwork;
@@ -29,8 +32,8 @@ import static com.example.axel.nbamuzei.ImageServices.SaveImageToGalleryService.
 public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
 
-    private static final int UPDATE_IMAGE_TIME_MILLIS =  10 * 1000;
-    private static final int NO_INTERNET_TIME_MILLIS =  20 * 1000;
+    private static final int UPDATE_IMAGE_TIME_MILLIS =  20 * 1000;
+    private static final int NO_INTERNET_TIME_MILLIS =  15 * 1000;
     private static final int SAVE_TO_GALLERY_COMMAND_ID =  12345;
     private static final String NAME = "NBAMuzei";
     Subscription subscription;
@@ -47,7 +50,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     private void manageUserCommands() {
         List<UserCommand> commands = new ArrayList<UserCommand>();
-        commands.add(new UserCommand(SAVE_TO_GALLERY_COMMAND_ID, "Save to Gallery"));
+        commands.add(new UserCommand(SAVE_TO_GALLERY_COMMAND_ID, getString(R.string.save_to_gallery_button)));
         setUserCommands(commands);
     }
 
@@ -111,8 +114,17 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         super.onCustomCommand(id);
         switch (id) {
             case SAVE_TO_GALLERY_COMMAND_ID:
+                ShowMessage(getString(R.string.saving_to_gallery_message));
                 AddImageToGallery(getBaseContext());
         }
+
+    }
+
+    private void ShowMessage(String message) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(() -> Toast.makeText(MuzeiImageGenerator.this.getApplicationContext(),message,Toast.LENGTH_LONG)
+                .show());
+
 
     }
 

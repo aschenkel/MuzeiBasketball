@@ -1,12 +1,11 @@
 package com.example.axel.nbamuzei.ImageServices;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 
@@ -19,10 +18,8 @@ import static com.example.axel.nbamuzei.Utils.FILENAME;
 public class SaveImageToGalleryService {
     public static void AddImageToGallery(Context context){
         Bitmap bitmap = GetBitmapFromPath();
-        Log.e("Bitmap",bitmap.toString());
         MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap,"", "");
-        Toast.makeText(context,
-                "Image Saved", Toast.LENGTH_SHORT).show();
+        OpenGallery(context);
     }
 
     private static Bitmap GetBitmapFromPath(){
@@ -32,5 +29,11 @@ public class SaveImageToGalleryService {
         File file = new File(path, FILENAME);
         return BitmapFactory.decodeFile(file.getAbsolutePath(), options);
 
+    }
+
+    private static void OpenGallery(Context context){
+        Intent galleryIntent = new Intent(Intent.ACTION_VIEW, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(galleryIntent);
     }
 }
