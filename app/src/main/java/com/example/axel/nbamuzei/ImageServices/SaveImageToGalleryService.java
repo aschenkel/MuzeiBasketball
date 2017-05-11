@@ -18,11 +18,11 @@ import static com.example.axel.nbamuzei.Utils.FILENAME;
 public class SaveImageToGalleryService {
     public static void AddImageToGallery(Context context){
         Bitmap bitmap = GetBitmapFromPath();
-        MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap,"", "");
+        MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap,"NBA Muzei", "");
         OpenGallery(context);
     }
 
-    private static Bitmap GetBitmapFromPath(){
+    public static Bitmap GetBitmapFromPath(){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         String path = Environment.getExternalStorageDirectory().toString();

@@ -4,5 +4,6 @@
     <string name="title">NBA Muzei</string>
     <string name="saving_to_gallery_message">Saving image..</string>
     <string name="save_to_gallery_button">Save to gallery</string>
+    <string name="share">Share</string>
 
 </resources>
