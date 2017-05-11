@@ -1,0 +1,28 @@
+package com.example.axel.nbamuzei.DataAccess;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.example.axel.nbamuzei.NBAImage;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.kelvinapps.rxfirebase.RxFirebaseDatabase;
+
+import rx.Observable;
+
+/**
+ * Created by axel on 11/05/17.
+ */
+
+public class FirebaseService {
+    private static DatabaseReference mDatabase;
+
+    public static Observable<NBAImage> GetNextImageFromFirebase (Context context){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mDatabase = database.getReference();
+        String imageId = String.valueOf(SharedPreferencesService.UpdateCurrentID(context));
+        Log.i("AHORA:", "NEXTID:"+imageId);
+        ;return RxFirebaseDatabase.observeSingleValueEvent(mDatabase.child(imageId), NBAImage.class);
+    }
+
+}

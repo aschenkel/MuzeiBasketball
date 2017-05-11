@@ -10,28 +10,31 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.axel.nbamuzei.DataAccess.SharedPreferencesService;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+import static com.example.axel.nbamuzei.DataAccess.FirebaseService.GetNextImageFromFirebase;
+import static com.example.axel.nbamuzei.ImageServices.SaveImageToGalleryService.AddImageToGallery;
 
 
 public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
 
     private static final int UPDATE_IMAGE_TIME_MILLIS =  10 * 1000;
-    private static final int NO_INTERNET_TIME_MILLIS =  10 * 1000;
+    private static final int NO_INTERNET_TIME_MILLIS =  20 * 1000;
     private static final int SAVE_TO_GALLERY_COMMAND_ID =  12345;
     private static final String NAME = "NBAMuzei";
-    private DatabaseReference mDatabase;
-    private String imageURL="";
+    Subscription subscription;
+
     public MuzeiImageGenerator() {
         super( NAME );
     }
@@ -48,7 +51,6 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         setUserCommands(commands);
     }
 
-
     @Override
     protected void onTryUpdate( int reason ) throws RetryException {
 
@@ -56,19 +58,37 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
             updateImage();
         }
         else{
-            scheduleUpdateInMiliseconds(NO_INTERNET_TIME_MILLIS);
+            ReScheduleUpdate(NO_INTERNET_TIME_MILLIS);
         }
-
-    }
-
-    private void scheduleUpdateInMiliseconds(long milliseconds) {
-        scheduleUpdate(System.currentTimeMillis() + milliseconds);
     }
 
 
+    private void updateImage() {
+        ReScheduleUpdate(UPDATE_IMAGE_TIME_MILLIS);      //Done before updating to avoid some GooglePlayServices issues on some devices
+        QueryFirebase();
 
+    }
+
+    private void QueryFirebase() {
+        subscription = GetNextImageFromFirebase(getBaseContext())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(throwable -> FirebaseError())
+                .subscribe(this::OnCompleted);
+    }
+
+
+    private void OnCompleted(NBAImage image){
+        Log.i("AHORA:", "completado");
+        if (image != null) {
+            setMuzeiImage(image);
+           // CacheImage(image.url);                     //To be able to save it to Gallery later
+        } else {
+            SharedPreferencesService.ReestartID(getBaseContext());
+            FirebaseError();
+        }
+    }
     private void setMuzeiImage(NBAImage img) {
-        SharedPreferencesManager.UpdateCurrentURLForSaveToGallery(img.url,getApplicationContext());
         publishArtwork(new Artwork.Builder()
                 .title(img.name)
                 .byline(img.description)
@@ -77,7 +97,15 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
                 .build() );
     }
 
+    private void FirebaseError() {
+        Log.i("AHORA:", "ERROR");
+        unscheduleUpdate();
+        ReScheduleUpdate(NO_INTERNET_TIME_MILLIS);
+    }
 
+    private void ReScheduleUpdate(long milliseconds) {
+        scheduleUpdate(System.currentTimeMillis() + milliseconds);
+    }
 
 
     @Override
@@ -85,65 +113,17 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         super.onCustomCommand(id);
         switch (id) {
             case SAVE_TO_GALLERY_COMMAND_ID:
-                //Save to gallery here
-                    SaveImage();
+                AddImageToGallery(getBaseContext());
         }
 
-    }
-
-    private void SaveImage() {
-        String url= SharedPreferencesManager.ReadSharedPrefURL(getApplicationContext());
-        SaveImageService.CacheImage(url,getApplicationContext());
-    }
-
-
-    private void updateImage() {
-       // FirebaseApp.initializeApp(getBaseContext());
-        //Set next update
-        scheduleUpdateInMiliseconds(UPDATE_IMAGE_TIME_MILLIS);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        GetNextIdFromFirebase(database);
-
-    }
-
-    private void GetNextIdFromFirebase(FirebaseDatabase database) {
-        mDatabase = database.getReference();
-        String imageId= String.valueOf(SharedPreferencesManager.UpdateCurrentID(getApplicationContext()));
-        Log.i("Siguiente imagen: ", imageId);
-        mDatabase.child(imageId).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
-                        NBAImage imagen = dataSnapshot.getValue(NBAImage.class);
-                        //Si no hay más en la DB
-                        if (imagen != null) {
-                            setMuzeiImage(imagen);
-                        }
-                        else {
-                            SharedPreferencesManager.ReestartID(getApplicationContext());
-                            ReScheduleUpdate();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w("", "getUser:onCancelled", databaseError.toException());
-                        ReScheduleUpdate();
-
-                    }
-
-                    private void ReScheduleUpdate() {
-                        unscheduleUpdate();
-                        scheduleUpdateInMiliseconds(NO_INTERNET_TIME_MILLIS);
-                    }
-
-
-                });
     }
 
     private boolean isNetworkAvailable() {
         return Utils.isNetworkAvailable((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE));
     }
+
+
+
 
 
 }

@@ -5,7 +5,7 @@ package com.example.axel.nbamuzei;
  */
 
 public class NBAImage {
-    String url;
+    public String url;
     String name;
     String description;
 
