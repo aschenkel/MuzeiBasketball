@@ -81,7 +81,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
     private void OnCompleted(NBAImage image){
         if (image != null) {
             setMuzeiImage(image);
-            CacheImageFromURL(image.getUrl(),getBaseContext());                     //To be able to save it to Gallery later
+            CacheImageFromURL(image.getUrl(),getApplicationContext());                     //To be able to save it to Gallery later
         } else {
             SharedPreferencesService.ReestartID(getBaseContext());
             FirebaseError();

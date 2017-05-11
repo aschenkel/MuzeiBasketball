@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
  */
 
 public class Utils {
+    public static final String FILENAME = "NBA_MUZEI_IMAGE";
+
     public static boolean isNetworkAvailable(ConnectivityManager connectivityManager) {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
