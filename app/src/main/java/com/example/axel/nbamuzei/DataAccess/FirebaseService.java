@@ -1,7 +1,6 @@
 package com.example.axel.nbamuzei.DataAccess;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.axel.nbamuzei.NBAImage;
 import com.google.firebase.database.DatabaseReference;
@@ -21,8 +20,7 @@ public class FirebaseService {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference();
         String imageId = String.valueOf(SharedPreferencesService.UpdateCurrentID(context));
-        Log.i("AHORA:", "NEXTID:"+imageId);
-        ;return RxFirebaseDatabase.observeSingleValueEvent(mDatabase.child(imageId), NBAImage.class);
+        return RxFirebaseDatabase.observeSingleValueEvent(mDatabase.child(imageId), NBAImage.class);
     }
 
 }

@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
-import android.util.Log;
 
 import com.example.axel.nbamuzei.DataAccess.SharedPreferencesService;
 import com.google.android.apps.muzei.api.Artwork;
@@ -79,7 +78,6 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
 
     private void OnCompleted(NBAImage image){
-        Log.i("AHORA:", "completado");
         if (image != null) {
             setMuzeiImage(image);
            // CacheImage(image.url);                     //To be able to save it to Gallery later
@@ -90,15 +88,14 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
     }
     private void setMuzeiImage(NBAImage img) {
         publishArtwork(new Artwork.Builder()
-                .title(img.name)
-                .byline(img.description)
-                .imageUri(Uri.parse(img.url))
-                .viewIntent( new Intent(Intent.ACTION_VIEW, Uri.parse( img.url ) ) )
+                .title(img.getName())
+                .byline(img.getDescription())
+                .imageUri(Uri.parse(img.getUrl()))
+                .viewIntent( new Intent(Intent.ACTION_VIEW, Uri.parse( img.getUrl() ) ) )
                 .build() );
     }
 
     private void FirebaseError() {
-        Log.i("AHORA:", "ERROR");
         unscheduleUpdate();
         ReScheduleUpdate(NO_INTERNET_TIME_MILLIS);
     }

@@ -5,9 +5,9 @@ package com.example.axel.nbamuzei;
  */
 
 public class NBAImage {
-    public String url;
-    String name;
-    String description;
+    private String url;
+    private String name;
+    private String description;
 
     //For DataBase incomming object
     public NBAImage(){
@@ -18,5 +18,19 @@ public class NBAImage {
         this.url = url;
         this.name = name;
         this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public String getDescription() {
+        return description;
     }
 }
