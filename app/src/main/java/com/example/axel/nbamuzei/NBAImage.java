@@ -9,7 +9,7 @@ public class NBAImage {
     private String name;
     private String description;
 
-    //For DataBase incomming object
+    //For Firebase DataBase incomming object
     public NBAImage(){
 
     }

@@ -22,6 +22,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static com.example.axel.nbamuzei.DataAccess.FirebaseService.GetNextImageFromFirebase;
+import static com.example.axel.nbamuzei.ImageServices.CacheImageService.CacheImageFromURL;
 import static com.example.axel.nbamuzei.ImageServices.SaveImageToGalleryService.AddImageToGallery;
 
 
@@ -80,7 +81,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
     private void OnCompleted(NBAImage image){
         if (image != null) {
             setMuzeiImage(image);
-           // CacheImage(image.url);                     //To be able to save it to Gallery later
+            CacheImageFromURL(image.getUrl(),getBaseContext());                     //To be able to save it to Gallery later
         } else {
             SharedPreferencesService.ReestartID(getBaseContext());
             FirebaseError();
