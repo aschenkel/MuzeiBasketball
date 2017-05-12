@@ -7,6 +7,7 @@ package com.example.axel.nbamuzei;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -32,8 +33,8 @@ import static com.example.axel.nbamuzei.ImageServices.SaveImageToGalleryService.
 public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
 
-    private static final int UPDATE_IMAGE_TIME_MILLIS =  60*60 * 1000;
-    private static final int NO_INTERNET_TIME_MILLIS =  2*60 * 1000;
+    private static final int UPDATE_IMAGE_TIME_MILLIS =  30 * 1000;
+    private static final int NO_INTERNET_TIME_MILLIS =  15 * 1000;
     private static final int SAVE_TO_GALLERY_COMMAND_ID =  12345;
     private static final String NAME = "NBAMuzei";
     Subscription subscription;
@@ -130,7 +131,9 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
     }
 
     private boolean isNetworkAvailable() {
-        return Utils.isNetworkAvailable((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE));
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 

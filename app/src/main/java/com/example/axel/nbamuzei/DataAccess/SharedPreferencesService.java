@@ -12,13 +12,11 @@ public class SharedPreferencesService {
     private static final int START_ID_VALUE = 0;
     private static final String ID_TAG = "ID";
 
-
     public static int UpdateCurrentID(Context context){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         int CurrentID = ReadSharedPrefID(context);
         editor.putInt(ID_TAG, ++CurrentID);
-
         editor.apply();
         return CurrentID;
     }

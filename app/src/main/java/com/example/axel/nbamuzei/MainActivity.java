@@ -5,12 +5,10 @@ import android.os.Bundle;
 
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.ArrayList;
-
 public class MainActivity extends Activity {
     // Firebase instance variables
     private DatabaseReference mDatabase;
-    int cont =1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,11 +17,7 @@ public class MainActivity extends Activity {
 
     }
 
-    private String getNextPictureId(){
-        return String.valueOf(cont++);
-    }
-
-    private void AddImages(){
+    /*private void AddImages(){
         int id =1;
         ArrayList<NBAImage> list = new ArrayList<>();
         list.add(new NBAImage("http://1.bp.blogspot.com/-KZXWHcf08jI/Tb-ppoY2G8I/AAAAAAAAAp4/XJsZTHuB4bM/s1600/Series+MVP+and+guard+Michael+Jordan+of+the+Chicago+Bulls+hugs+the+championship+trophy+as+the+Bulls+defeated+the+Los+Angeles+Lakers%252C+1991.jpg","Michael Jordan hugs his first NBA Trophy on 1991",""));
@@ -316,5 +310,5 @@ public class MainActivity extends Activity {
             id++;
         }
 
-    }
+    }*/
 }

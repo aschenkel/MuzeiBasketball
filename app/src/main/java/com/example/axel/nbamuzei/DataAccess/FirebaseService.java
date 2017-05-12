@@ -14,11 +14,10 @@ import rx.Observable;
  */
 
 public class FirebaseService {
-    private static DatabaseReference mDatabase;
 
     public static Observable<NBAImage> GetNextImageFromFirebase (Context context){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mDatabase = database.getReference();
+        DatabaseReference mDatabase = database.getReference();
         String imageId = String.valueOf(SharedPreferencesService.UpdateCurrentID(context));
         return RxFirebaseDatabase.observeSingleValueEvent(mDatabase.child(imageId), NBAImage.class);
     }

@@ -9,7 +9,7 @@ import android.provider.MediaStore;
 
 import java.io.File;
 
-import static com.example.axel.nbamuzei.Utils.FILENAME;
+import static com.example.axel.nbamuzei.ImageServices.CacheImageService.FILENAME;
 
 /**
  * Created by axel on 11/05/17.
@@ -22,7 +22,7 @@ public class SaveImageToGalleryService {
         OpenGallery(context);
     }
 
-    public static Bitmap GetBitmapFromPath(){
+    private static Bitmap GetBitmapFromPath(){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         String path = Environment.getExternalStorageDirectory().toString();

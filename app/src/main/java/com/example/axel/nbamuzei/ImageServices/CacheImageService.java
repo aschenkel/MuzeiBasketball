@@ -11,13 +11,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 
-import static com.example.axel.nbamuzei.Utils.FILENAME;
-
 /**
  * Created by axel on 09/05/17.
  */
 
 public class CacheImageService {
+
+    public static final String FILENAME = "NBA_MUZEI_IMAGE";
 
     static Context context;
     public static void CacheImageFromURL(String URL,Context contextParam){
