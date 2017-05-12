@@ -33,7 +33,7 @@ import static com.example.axel.nbamuzei.ImageServices.SaveImageToGalleryService.
 public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
 
-    private static final int UPDATE_IMAGE_TIME_MILLIS =  30 * 1000;
+    private static final int UPDATE_IMAGE_TIME_MILLIS =  10 * 1000;
     private static final int NO_INTERNET_TIME_MILLIS =  15 * 1000;
     private static final int SAVE_TO_GALLERY_COMMAND_ID =  12345;
     private static final String NAME = "NBAMuzei";
