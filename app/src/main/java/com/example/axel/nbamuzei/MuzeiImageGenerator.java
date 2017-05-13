@@ -13,7 +13,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.example.axel.nbamuzei.DataAccess.FirebaseService;
 import com.example.axel.nbamuzei.DataAccess.SharedPreferencesService;
+import com.example.axel.nbamuzei.ImageServices.CacheImageService;
+import com.example.axel.nbamuzei.ImageServices.SaveImageToGalleryService;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;
@@ -25,10 +28,6 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.example.axel.nbamuzei.DataAccess.FirebaseService.GetNextImageFromFirebase;
-import static com.example.axel.nbamuzei.ImageServices.CacheImageService.CacheImageFromURL;
-import static com.example.axel.nbamuzei.ImageServices.SaveImageToGalleryService.AddImageToGallery;
-
 
 public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
@@ -38,6 +37,9 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
     private static final int SAVE_TO_GALLERY_COMMAND_ID =  12345;
     private static final String NAME = "NBAMuzei";
     Subscription subscription;
+    CacheImageService cacheImageService;
+    SharedPreferencesService sharedPreferencesService;
+    FirebaseService firebaseService;
 
     public MuzeiImageGenerator() {
         super( NAME );
@@ -47,6 +49,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
     public void onCreate() {
         super.onCreate();
         manageUserCommands();
+        InstanceServices();
     }
 
     private void manageUserCommands() {
@@ -54,6 +57,13 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         commands.add(new UserCommand(SAVE_TO_GALLERY_COMMAND_ID, getString(R.string.save_to_gallery_button)));
         setUserCommands(commands);
     }
+
+    private void InstanceServices(){
+        cacheImageService = new CacheImageService(getApplicationContext());
+        sharedPreferencesService = new SharedPreferencesService(getApplicationContext());
+        firebaseService = new FirebaseService();
+    }
+
 
     @Override
     protected void onTryUpdate( int reason ) throws RetryException {
@@ -69,25 +79,28 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     private void updateImage() {
         ReScheduleUpdate(UPDATE_IMAGE_TIME_MILLIS);      //Done before updating to avoid some GooglePlayServices issues on some devices
-        QueryFirebase();
-
+        String imageId = GetNextID();
+        GetNextImageFromFirebase(imageId,firebaseService);
     }
 
-    private void QueryFirebase() {
-        subscription = GetNextImageFromFirebase(getBaseContext())
+    private String GetNextID(){
+        return sharedPreferencesService.UpdateCurrentID();
+    }
+
+    private void GetNextImageFromFirebase(String imageId,FirebaseService firebaseService) {
+        subscription = firebaseService.GetNextImage(imageId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> FirebaseError())
                 .subscribe(this::OnCompleted);
     }
 
-
     private void OnCompleted(NBAImage image){
         if (image != null) {
             setMuzeiImage(image);
-            CacheImageFromURL(image.getUrl(),getApplicationContext());                     //To be able to save it to Gallery later
+            cacheImageService.execute(image.getUrl());                     //To be able to save it to Gallery later
         } else {
-            SharedPreferencesService.ReestartID(getBaseContext());
+            sharedPreferencesService.ReestartID();
             FirebaseError();
         }
     }
@@ -116,7 +129,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         switch (id) {
             case SAVE_TO_GALLERY_COMMAND_ID:
                 ShowMessage(getString(R.string.saving_to_gallery_message));
-                AddImageToGallery(getBaseContext());
+                new SaveImageToGalleryService().AddImageToGallery(getBaseContext());
                 break;
         }
 
@@ -124,10 +137,8 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     private void ShowMessage(String message) {
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> Toast.makeText(MuzeiImageGenerator.this.getApplicationContext(),message,Toast.LENGTH_LONG)
+        handler.post(() -> Toast.makeText(MuzeiImageGenerator.this.getApplicationContext(),message,Toast.LENGTH_SHORT)
                 .show());
-
-
     }
 
     private boolean isNetworkAvailable() {

@@ -11,17 +11,22 @@ import android.preference.PreferenceManager;
 public class SharedPreferencesService {
     private static final int START_ID_VALUE = 0;
     private static final String ID_TAG = "ID";
+    private Context context;
 
-    public static int UpdateCurrentID(Context context){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = prefs.edit();
-        int CurrentID = ReadSharedPrefID(context);
-        editor.putInt(ID_TAG, ++CurrentID);
-        editor.apply();
-        return CurrentID;
+    public SharedPreferencesService(Context context){
+        this.context = context;
     }
 
-    public static int ReestartID(Context context){
+    public String UpdateCurrentID(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        int CurrentID = ReadSharedPrefID();
+        editor.putInt(ID_TAG, ++CurrentID);
+        editor.apply();
+        return String.valueOf(CurrentID);
+    }
+
+    public int ReestartID(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(ID_TAG, START_ID_VALUE);
@@ -29,7 +34,7 @@ public class SharedPreferencesService {
         return START_ID_VALUE;
     }
 
-    private static int ReadSharedPrefID(Context context){
+    private int ReadSharedPrefID(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         int ID = prefs.getInt(ID_TAG, START_ID_VALUE);
         if(ID != START_ID_VALUE)

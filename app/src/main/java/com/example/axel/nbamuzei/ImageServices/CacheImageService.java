@@ -15,18 +15,15 @@ import java.net.URL;
  * Created by axel on 09/05/17.
  */
 
-public class CacheImageService {
+ public class CacheImageService extends AsyncTask<String, Void, Bitmap> {
 
-    public static final String FILENAME = "NBA_MUZEI_IMAGE";
+        public static final String FILENAME = "NBA_MUZEI_IMAGE";
 
-    static Context context;
-    public static void CacheImageFromURL(String URL,Context contextParam){
-        context = contextParam;
-        new CacheImage().execute(URL);
+        Context context;
 
-    }
-
-    private static class CacheImage extends AsyncTask<String, Void, Bitmap> {
+        public CacheImageService(Context context){
+            this.context = context;
+        }
 
         @Override
         protected Bitmap doInBackground(String... params) {
@@ -51,7 +48,7 @@ public class CacheImageService {
             SaveImageToStorage(bitmap);
         }
 
-        private static void SaveImageToStorage(Bitmap bitmap)
+        private void SaveImageToStorage(Bitmap bitmap)
         {
             FileOutputStream out = null;
             try {
@@ -78,4 +75,4 @@ public class CacheImageService {
 
 
 
-}
+
