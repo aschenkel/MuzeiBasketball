@@ -100,7 +100,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
             setMuzeiImage(image);
             cacheImageService.execute(image.getUrl());                     //To be able to save it to Gallery later
         } else {
-            sharedPreferencesService.ReestartID();
+            sharedPreferencesService.RestartID();
             FirebaseError();
         }
     }
