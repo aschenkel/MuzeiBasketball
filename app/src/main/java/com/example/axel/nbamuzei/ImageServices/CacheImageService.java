@@ -4,12 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Environment;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+
+import static com.example.axel.nbamuzei.ImageServices.BitmapUtils.getPath;
 
 /**
  * Created by axel on 09/05/17.
@@ -19,10 +18,12 @@ import java.net.URL;
 
         public static final String FILENAME = "NBA_MUZEI_IMAGE";
 
+        BitmapUtils bitmapUtils;
         Context context;
 
         public CacheImageService(Context context){
             this.context = context;
+            this.bitmapUtils = new BitmapUtils();
         }
 
         @Override
@@ -45,30 +46,10 @@ import java.net.URL;
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            SaveImageToStorage(bitmap);
+            bitmapUtils.SaveBitmapToPath(bitmap,getPath());
         }
 
-        private void SaveImageToStorage(Bitmap bitmap)
-        {
-            FileOutputStream out = null;
-            try {
-                String path = Environment.getExternalStorageDirectory().toString();
-                File file = new File(path, FILENAME);
-                out = new FileOutputStream(file);
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (out != null) {
-                        out.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
-        }
 
     }
 

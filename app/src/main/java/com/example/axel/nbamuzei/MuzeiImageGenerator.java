@@ -5,7 +5,6 @@ package com.example.axel.nbamuzei;
  */
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -67,7 +66,6 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     @Override
     protected void onTryUpdate( int reason ) throws RetryException {
-
         if(isNetworkAvailable()) {
             updateImage();
         }
@@ -79,15 +77,11 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     private void updateImage() {
         ReScheduleUpdate(UPDATE_IMAGE_TIME_MILLIS);      //Done before updating to avoid some GooglePlayServices issues on some devices
-        String imageId = GetNextID();
-        GetNextImageFromFirebase(imageId,firebaseService);
+        String nextId = sharedPreferencesService.GetNextID();
+        GetNextImageFromFirebase(nextId);
     }
 
-    private String GetNextID(){
-        return sharedPreferencesService.UpdateCurrentID();
-    }
-
-    public void GetNextImageFromFirebase(String imageId,FirebaseService firebaseService) {
+    public void GetNextImageFromFirebase(String imageId) {
         subscription = firebaseService.GetNextImage(imageId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -98,18 +92,22 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
     public void OnCompleted(NBAImage image){
         if (image != null) {
             setMuzeiImage(image);
-            cacheImageService.execute(image.getUrl());                     //To be able to save it to Gallery later
+            CacheImage(image);
         } else {
             sharedPreferencesService.RestartID();
             FirebaseError();
         }
     }
+
+    private void CacheImage(NBAImage image) {
+        cacheImageService.execute(image.getUrl());                     //To be able to save it to Gallery later
+    }
+
     private void setMuzeiImage(NBAImage img) {
         publishArtwork(new Artwork.Builder()
                 .title(img.getName())
                 .byline(img.getDescription())
                 .imageUri(Uri.parse(img.getUrl()))
-                .viewIntent( new Intent(Intent.ACTION_VIEW, Uri.parse( img.getUrl() ) ) )
                 .build() );
     }
 
@@ -146,11 +144,6 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
-
-
-
-
 }
 
 

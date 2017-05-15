@@ -3,13 +3,9 @@ package com.example.axel.nbamuzei.ImageServices;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.provider.MediaStore;
 
-import java.io.File;
-
-import static com.example.axel.nbamuzei.ImageServices.CacheImageService.FILENAME;
+import static com.example.axel.nbamuzei.ImageServices.BitmapUtils.getPath;
 
 /**
  * Created by axel on 11/05/17.
@@ -17,18 +13,9 @@ import static com.example.axel.nbamuzei.ImageServices.CacheImageService.FILENAME
 
 public class SaveImageToGalleryService {
     public void AddImageToGallery(Context context){
-        Bitmap bitmap = GetBitmapFromPath();
+        Bitmap bitmap = new BitmapUtils().GetBitmapFromPath(getPath());
         MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap,"NBA Muzei", "");
         OpenGallery(context);
-    }
-
-    private Bitmap GetBitmapFromPath(){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        String path = Environment.getExternalStorageDirectory().toString();
-        File file = new File(path, FILENAME);
-        return BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-
     }
 
     private void OpenGallery(Context context){

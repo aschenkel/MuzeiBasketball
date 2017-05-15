@@ -51,7 +51,7 @@ public class SharedPreferencesTest {
     public void UpdateCurrentIDTest() throws Exception {
         when(mEditor.putString(ID_TAG, "")).thenReturn(mEditor);
         when(sharedPreferencesService.ReadSharedPrefID()).thenReturn(START_ID_VALUE);
-        assertEquals(CORRECT_RETURN_VALUE, sharedPreferencesService.UpdateCurrentID());
+        assertEquals(CORRECT_RETURN_VALUE, sharedPreferencesService.GetNextID());
     }
 
     @Test

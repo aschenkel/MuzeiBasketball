@@ -18,7 +18,7 @@ public class SharedPreferencesService {
         this.context = context;
     }
 
-    public String UpdateCurrentID(){
+    public String GetNextID(){
         SharedPreferences prefs = context.getSharedPreferences(SHARE_PREFERENCES_NAME,MODE);
         SharedPreferences.Editor editor = prefs.edit();
         int CurrentID = ReadSharedPrefID();
