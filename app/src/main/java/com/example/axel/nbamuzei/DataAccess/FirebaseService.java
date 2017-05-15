@@ -15,8 +15,8 @@ public class FirebaseService {
 
     public Observable<NBAImage> GetNextImage(String imageId){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference mDatabase = database.getReference();
-        return RxFirebaseDatabase.observeSingleValueEvent(mDatabase.child(imageId), NBAImage.class);
+        DatabaseReference databaseReference = database.getReference();
+        return RxFirebaseDatabase.observeSingleValueEvent(databaseReference.child(imageId), NBAImage.class);
     }
 
 }

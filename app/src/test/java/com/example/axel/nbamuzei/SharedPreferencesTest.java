@@ -20,44 +20,49 @@ import static org.mockito.Mockito.when;
  * Created by axel on 13/05/17.
  */
 
-public class SharePreferencesTest {
+public class SharedPreferencesTest {
 
     private static final int START_ID_VALUE = 0;
     private static final String CORRECT_RETURN_VALUE = "1";
     private static final String ID_TAG = "ID";
     @Mock SharedPreferences sharedPrefs;
     @Mock Context context;
-    @Mock SharedPreferencesService sharedPreferencesService;
+    SharedPreferencesService sharedPreferencesService;
     @Mock SharedPreferences.Editor mEditor;
 
     @Before
     public void before() throws Exception {
-        this.mEditor = Mockito.mock(SharedPreferences.Editor.class);
-        this.sharedPrefs = Mockito.mock(SharedPreferences.class);
-        this.context = Mockito.mock(Context.class);
+
+        InitMocks();
 
         when(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPrefs);
         when(sharedPrefs.edit()).thenReturn(mEditor);
+
         sharedPreferencesService = new SharedPreferencesService(this.context);
     }
 
+    private void InitMocks() {
+        this.mEditor = Mockito.mock(SharedPreferences.Editor.class);
+        this.sharedPrefs = Mockito.mock(SharedPreferences.class);
+        this.context = Mockito.mock(Context.class);
+    }
+
     @Test
-    public void UpdateCurrentID() throws Exception {
+    public void UpdateCurrentIDTest() throws Exception {
         when(mEditor.putString(ID_TAG, "")).thenReturn(mEditor);
         when(sharedPreferencesService.ReadSharedPrefID()).thenReturn(START_ID_VALUE);
         assertEquals(CORRECT_RETURN_VALUE, sharedPreferencesService.UpdateCurrentID());
     }
 
     @Test
-    public void ReestartID() throws Exception {
+    public void ReestartIDTest() throws Exception {
         when(mEditor.putInt(ID_TAG, START_ID_VALUE)).thenReturn(mEditor);
         assertEquals(START_ID_VALUE, sharedPreferencesService.RestartID());
         verify(mEditor.putInt(ID_TAG, START_ID_VALUE));
     }
 
     @Test
-    public void ReadSharedPrefID() throws Exception {
-        when(sharedPrefs.getInt(ID_TAG, START_ID_VALUE)).thenReturn(START_ID_VALUE);
+    public void ReadSharedPrefIDTest() throws Exception {
         assertEquals(START_ID_VALUE, sharedPreferencesService.ReadSharedPrefID());
     }
 

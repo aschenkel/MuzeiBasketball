@@ -87,7 +87,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         return sharedPreferencesService.UpdateCurrentID();
     }
 
-    private void GetNextImageFromFirebase(String imageId,FirebaseService firebaseService) {
+    public void GetNextImageFromFirebase(String imageId,FirebaseService firebaseService) {
         subscription = firebaseService.GetNextImage(imageId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -95,7 +95,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
                 .subscribe(this::OnCompleted);
     }
 
-    private void OnCompleted(NBAImage image){
+    public void OnCompleted(NBAImage image){
         if (image != null) {
             setMuzeiImage(image);
             cacheImageService.execute(image.getUrl());                     //To be able to save it to Gallery later

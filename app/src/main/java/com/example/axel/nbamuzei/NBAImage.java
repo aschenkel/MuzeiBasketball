@@ -14,6 +14,13 @@ public class NBAImage {
 
     }
 
+    public NBAImage(String url, String name, String description) {
+        this.url = url;
+        this.name = name;
+        this.description = description;
+    }
+
+
     public String getUrl() {
         return url;
     }
