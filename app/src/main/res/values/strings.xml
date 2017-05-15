@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NBAMuzei</string>
+    <string name="app_name">NBA Muzei</string>
     <string name="description">NBA pictures</string>
     <string name="title">NBA Muzei</string>
     <string name="saving_to_gallery_message">Image saved</string>
