@@ -9,6 +9,8 @@ public class MainActivity extends Activity {
     // Firebase instance variables
     private DatabaseReference mDatabase;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

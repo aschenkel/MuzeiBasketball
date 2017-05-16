@@ -5,17 +5,15 @@ package com.example.axel.nbamuzei;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
-import android.widget.Toast;
 
 import com.example.axel.nbamuzei.DataAccess.FirebaseService;
 import com.example.axel.nbamuzei.DataAccess.SharedPreferencesService;
 import com.example.axel.nbamuzei.ImageServices.CacheImageService;
-import com.example.axel.nbamuzei.ImageServices.SaveImageToGalleryService;
+import com.example.axel.nbamuzei.Permissions.AskPermissionsActivity;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;
@@ -126,18 +124,18 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         super.onCustomCommand(id);
         switch (id) {
             case SAVE_TO_GALLERY_COMMAND_ID:
-                ShowMessage(getString(R.string.saving_to_gallery_message));
-                new SaveImageToGalleryService().AddImageToGallery(getBaseContext());
+                LaunchPermissionActivity();
                 break;
         }
 
     }
 
-    private void ShowMessage(String message) {
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> Toast.makeText(MuzeiImageGenerator.this.getApplicationContext(),message,Toast.LENGTH_SHORT)
-                .show());
+    private void LaunchPermissionActivity() {
+        Intent dialogIntent = new Intent(this, AskPermissionsActivity.class);
+        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(dialogIntent);
     }
+
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

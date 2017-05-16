@@ -6,22 +6,22 @@ package="com.example.axel.nbamuzei">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-    android:allowBackup="true"
-    android:label="@string/app_name"
-    android:icon="@mipmap/ic_launcher_round"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-    android:theme="@style/AppTheme">
+        android:theme="@style/Theme.Transparent">
 
     <service android:name=".MuzeiImageGenerator"
         android:label="@string/app_name"
         android:description="@string/description"
-        android:icon="@drawable/ic_source"
+        android:icon="@drawable/basketball"
         >
         <intent-filter>
             <action android:name="com.google.android.apps.muzei.api.MuzeiArtSource" />
         </intent-filter>
 
-        <meta-data android:name="color" android:value="#67C7E2" />
+        <meta-data android:name="color" android:value="@color/orange" />
     </service>
     <activity android:name=".MainActivity">
         <intent-filter>
@@ -30,6 +30,8 @@ package="com.example.axel.nbamuzei">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
+        <activity android:name=".Permissions.AskPermissionsActivity" />
+
 </application>
 
 </manifest>

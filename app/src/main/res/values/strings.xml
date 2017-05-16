@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">NBA Muzei</string>
     <string name="description">NBA pictures</string>
-    <string name="title">NBA Muzei</string>
-    <string name="saving_to_gallery_message">Image saved</string>
+    <string name="image_saved">Image saved!</string>
     <string name="save_to_gallery_button">Save to gallery</string>
-    <string name="share">Share</string>
+    <string name="permission_denied">Permission denied. Unable to save it to gallery</string>
+
 
 </resources>

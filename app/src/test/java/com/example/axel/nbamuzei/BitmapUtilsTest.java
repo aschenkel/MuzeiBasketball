@@ -42,7 +42,7 @@ public class BitmapUtilsTest {
 
     @Test
     public void BitmapUtilsTest() throws Exception {
-        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.mipmap.common_ic_googleplayservices);
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.common_full_open_on_phone);
         Bitmap bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.common_ic_googleplayservices);
         String fakePath = ShadowEnvironment.getExternalStorageDirectory().toString();
       //  bitmapUtils.SaveBitmapToPath(bitmap1, fakePath);
