@@ -30,7 +30,7 @@ package="com.example.axel.nbamuzei">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-        <activity android:name=".Permissions.AskPermissionsActivity" />
+        <activity android:name=".Permissions.AskForPermissionsActivity" />
 
 </application>
 

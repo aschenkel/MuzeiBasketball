@@ -13,7 +13,7 @@ import android.net.Uri;
 import com.example.axel.nbamuzei.DataAccess.FirebaseService;
 import com.example.axel.nbamuzei.DataAccess.SharedPreferencesService;
 import com.example.axel.nbamuzei.ImageServices.CacheImageService;
-import com.example.axel.nbamuzei.Permissions.AskPermissionsActivity;
+import com.example.axel.nbamuzei.Permissions.AskForPermissionsActivity;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;
@@ -131,9 +131,9 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
     }
 
     private void LaunchPermissionActivity() {
-        Intent dialogIntent = new Intent(this, AskPermissionsActivity.class);
-        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(dialogIntent);
+        Intent permissionIntent = new Intent(this, AskForPermissionsActivity.class);
+        permissionIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(permissionIntent);
     }
 
 

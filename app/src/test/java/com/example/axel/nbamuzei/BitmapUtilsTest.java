@@ -15,8 +15,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowEnvironment;
 
-import java.util.Arrays;
-
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -29,11 +27,14 @@ public class BitmapUtilsTest {
     Context context;
     BitmapUtils bitmapUtils;
     Bitmap bitmap1;
+    String mockPath;
 
     @Before
     public void before() throws Exception {
         bitmapUtils = new BitmapUtils();
         InitMocks();
+        mockPath = ShadowEnvironment.getExternalStorageDirectory().toString();
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.common_full_open_on_phone);
     }
 
     private void InitMocks() {
@@ -41,23 +42,18 @@ public class BitmapUtilsTest {
     }
 
     @Test
-    public void BitmapUtilsTest() throws Exception {
-        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.common_full_open_on_phone);
-        Bitmap bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.common_ic_googleplayservices);
-        String fakePath = ShadowEnvironment.getExternalStorageDirectory().toString();
-      //  bitmapUtils.SaveBitmapToPath(bitmap1, fakePath);
-        int[] array1 = bitmapToIntArray(bitmap1);
-        int[] array2 = bitmapToIntArray(bitmap2);
-        assertTrue(Arrays.equals(array1,array2));
-
+    public void SaveBitmapToPathTest() throws Exception {
+        boolean result= bitmapUtils.SaveBitmapToPath(bitmap1, mockPath);
+        assertTrue(result);
     }
 
-    private int[] bitmapToIntArray(Bitmap bitmap) {
-        int x = bitmap.getWidth();
-        int y = bitmap.getHeight();
-        int[] intArray = new int[x * y];
-        bitmap.getPixels(intArray, 0, x, 0, 0, x, y);
-        return intArray;
+    @Test
+    public void GetBitmapFromPathTest() throws Exception {
+        boolean result= bitmapUtils.SaveBitmapToPath(bitmap1, mockPath);
+        if(result) {
+            Bitmap bitmap = bitmapUtils.GetBitmapFromPath(mockPath);
+            assertTrue(bitmap!=null);
+        }
     }
 
 

@@ -14,25 +14,26 @@ import com.example.axel.nbamuzei.R;
  * Created by axel on 16/05/17.
  */
 
-public class AskPermissionsActivity extends Activity {
+public class AskForPermissionsActivity extends Activity {
 
     static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 12345;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PermissionTest();
+        AskForWriteStoragePermission();
     }
 
-    private void PermissionTest(){
-        if (ContextCompat.checkSelfPermission(AskPermissionsActivity.this,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(AskPermissionsActivity.this,
+    private void AskForWriteStoragePermission(){
+        int permission = ContextCompat.checkSelfPermission(AskForPermissionsActivity.this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            //Request permission
+            ActivityCompat.requestPermissions(AskForPermissionsActivity.this,
                     new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
         }else{
+            //Permission already granted
             OnPermissionGranted();
         }
     }
@@ -50,10 +51,10 @@ public class AskPermissionsActivity extends Activity {
             case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+                    //Permission granted
                     OnPermissionGranted();
-
                 } else {
+                    //Permission denied
                     ShowMessage(getString(R.string.permission_denied));
                 }
                 finish();

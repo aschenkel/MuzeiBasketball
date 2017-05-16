@@ -20,7 +20,7 @@ public class BitmapUtils {
         return Environment.getExternalStorageDirectory().toString();
     }
 
-    public void SaveBitmapToPath(Bitmap bitmap,String path)
+    public boolean SaveBitmapToPath(Bitmap bitmap,String path)
     {
         FileOutputStream out = null;
         try {
@@ -29,6 +29,7 @@ public class BitmapUtils {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         } finally {
             try {
                 if (out != null) {
@@ -36,9 +37,10 @@ public class BitmapUtils {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                return false;
             }
         }
-
+        return true;
     }
 
     public Bitmap GetBitmapFromPath(String path){
