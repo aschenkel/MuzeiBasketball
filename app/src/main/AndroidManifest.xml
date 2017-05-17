@@ -23,13 +23,6 @@ package="com.example.axel.nbamuzei">
 
         <meta-data android:name="color" android:value="@color/orange" />
     </service>
-    <activity android:name=".MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
         <activity android:name=".Permissions.AskForPermissionsActivity" />
 
 </application>
