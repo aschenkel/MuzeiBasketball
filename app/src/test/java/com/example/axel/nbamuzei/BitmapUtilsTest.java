@@ -47,7 +47,8 @@ public class BitmapUtilsTest {
         assertTrue(result);
     }
 
-    @Test
+
+    @Test //NOT A UNIT TEST
     public void GetBitmapFromPathTest() throws Exception {
         boolean result= bitmapUtils.SaveBitmapToPath(bitmap1, mockPath);
         if(result) {

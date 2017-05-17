@@ -29,8 +29,8 @@ import rx.schedulers.Schedulers;
 public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
 
-    private static final int UPDATE_IMAGE_TIME_MILLIS =  10 * 1000;
-    private static final int NO_INTERNET_TIME_MILLIS =  15 * 1000;
+    private static final int UPDATE_IMAGE_TIME_MILLIS =  24 * 60 * 60 * 1000; //every day
+    private static final int NO_INTERNET_TIME_MILLIS =  5 * 60 * 1000; //every 5 minutes
     private static final int SAVE_TO_GALLERY_COMMAND_ID =  12345;
     private static final String NAME = "NBAMuzei";
     Subscription subscription;
