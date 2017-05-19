@@ -1,6 +1,6 @@
-package com.example.axel.nbamuzei;
+package com.schenkel.axel.muzeibasket;
 
-import com.example.axel.nbamuzei.DataAccess.FirebaseService;
+import com.schenkel.axel.muzeibasket.DataAccess.FirebaseService;
 import com.google.firebase.database.DatabaseError;
 import com.kelvinapps.rxfirebase.exceptions.RxFirebaseDataException;
 

@@ -1,9 +1,9 @@
-package com.example.axel.nbamuzei;
+package com.schenkel.axel.muzeibasket;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.axel.nbamuzei.DataAccess.SharedPreferencesService;
+import com.schenkel.axel.muzeibasket.DataAccess.SharedPreferencesService;
 
 import org.junit.Before;
 import org.junit.Test;

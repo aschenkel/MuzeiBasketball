@@ -1,10 +1,10 @@
-package com.example.axel.nbamuzei;
+package com.schenkel.axel.muzeibasket;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.example.axel.nbamuzei.ImageServices.BitmapUtils;
+import com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by axel on 15/05/17.
  */
-@Config(packageName="com.example.axel.nbamuzei")
+@Config(packageName="com.schenkel.axel.muzeibasket")
 @RunWith(RobolectricTestRunner.class)
 public class BitmapUtilsTest {
     @Mock

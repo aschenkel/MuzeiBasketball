@@ -1,4 +1,4 @@
-package com.example.axel.nbamuzei.Permissions;
+package com.schenkel.axel.muzeibasket.Permissions;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -7,8 +7,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-import com.example.axel.nbamuzei.ImageServices.SaveImageToGalleryService;
-import com.example.axel.nbamuzei.R;
+import com.schenkel.axel.muzeibasket.ImageServices.SaveImageToGalleryService;
+import com.schenkel.axel.muzeibasket.R;
 
 /**
  * Created by axel on 16/05/17.

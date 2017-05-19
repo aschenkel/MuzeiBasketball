@@ -1,11 +1,11 @@
-package com.example.axel.nbamuzei.ImageServices;
+package com.schenkel.axel.muzeibasket.ImageServices;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 
-import static com.example.axel.nbamuzei.ImageServices.BitmapUtils.getPath;
+import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
 
 /**
  * Created by axel on 11/05/17.

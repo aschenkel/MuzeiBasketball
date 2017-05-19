@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:430634340942:android:a450933b6bcc82cf",
+        "mobilesdk_app_id": "1:430634340942:android:ee90aacf00b47754",
         "android_client_info": {
-          "package_name": "com.example.axel.nbamuzei"
+          "package_name": "com.schenkel.axel.muzeibasket"
         }
       },
       "oauth_client": [

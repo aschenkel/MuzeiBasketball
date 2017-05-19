@@ -1,4 +1,4 @@
-package com.example.axel.nbamuzei.ImageServices;
+package com.schenkel.axel.muzeibasket.ImageServices;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import java.net.URL;
 
-import static com.example.axel.nbamuzei.ImageServices.BitmapUtils.getPath;
+import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
 
 /**
  * Created by axel on 09/05/17.

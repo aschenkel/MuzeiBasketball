@@ -1,4 +1,4 @@
-package com.example.axel.nbamuzei;
+package com.schenkel.axel.muzeibasket;
 
 /**
  * Created by axel on 04/05/17.
@@ -10,10 +10,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
-import com.example.axel.nbamuzei.DataAccess.FirebaseService;
-import com.example.axel.nbamuzei.DataAccess.SharedPreferencesService;
-import com.example.axel.nbamuzei.ImageServices.CacheImageService;
-import com.example.axel.nbamuzei.Permissions.AskForPermissionsActivity;
+import com.schenkel.axel.muzeibasket.DataAccess.FirebaseService;
+import com.schenkel.axel.muzeibasket.DataAccess.SharedPreferencesService;
+import com.schenkel.axel.muzeibasket.ImageServices.CacheImageService;
+import com.schenkel.axel.muzeibasket.Permissions.AskForPermissionsActivity;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;

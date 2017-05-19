@@ -1,6 +1,6 @@
-package com.example.axel.nbamuzei.DataAccess;
+package com.schenkel.axel.muzeibasket.DataAccess;
 
-import com.example.axel.nbamuzei.NBAImage;
+import com.schenkel.axel.muzeibasket.NBAImage;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kelvinapps.rxfirebase.RxFirebaseDatabase;

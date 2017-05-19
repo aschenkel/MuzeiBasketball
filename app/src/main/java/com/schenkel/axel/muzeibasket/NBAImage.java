@@ -1,4 +1,4 @@
-package com.example.axel.nbamuzei;
+package com.schenkel.axel.muzeibasket;
 
 /**
  * Created by axel on 04/05/17.
@@ -12,6 +12,12 @@ public class NBAImage {
     //For Firebase DataBase incomming object
     public NBAImage(){
 
+    }
+
+    public NBAImage(String url, String name, String description) {
+        this.url = url;
+        this.name = name;
+        this.description = description;
     }
 
     public String getUrl() {

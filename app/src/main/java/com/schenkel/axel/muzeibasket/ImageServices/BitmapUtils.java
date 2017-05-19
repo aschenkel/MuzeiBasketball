@@ -1,4 +1,4 @@
-package com.example.axel.nbamuzei.ImageServices;
+package com.schenkel.axel.muzeibasket.ImageServices;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static com.example.axel.nbamuzei.ImageServices.CacheImageService.FILENAME;
+import static com.schenkel.axel.muzeibasket.ImageServices.CacheImageService.FILENAME;
 
 /**
  * Created by axel on 15/05/17.
