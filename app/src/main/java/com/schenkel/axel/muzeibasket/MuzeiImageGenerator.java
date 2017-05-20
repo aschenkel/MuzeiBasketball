@@ -61,7 +61,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     private void InstanceServices(){
         cacheImageService = new CacheImageService(getApplicationContext());
-        MyApplication.injectLocalAndRemoteDB(this).inject(this);
+        MyApplication.getInstance().injectLocalAndRemoteDB(this).inject(this);
     }
 
 

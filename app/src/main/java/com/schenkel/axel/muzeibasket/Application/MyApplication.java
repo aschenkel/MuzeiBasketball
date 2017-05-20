@@ -11,7 +11,20 @@ import com.schenkel.axel.muzeibasket.MuzeiImageGenerator;
 
 public class MyApplication extends Application {
 
-    public static DBsComponent injectLocalAndRemoteDB(MuzeiImageGenerator muzeiImageGenerator){
+
+    private static MyApplication sInstance;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        sInstance = this;
+    }
+
+    public static MyApplication getInstance() {
+        return sInstance;
+    }
+
+    public DBsComponent injectLocalAndRemoteDB(MuzeiImageGenerator muzeiImageGenerator){
         return DBsComponent.Initializer.init(muzeiImageGenerator);
     }
 

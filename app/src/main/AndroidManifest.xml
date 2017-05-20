@@ -6,6 +6,7 @@ package="com.schenkel.axel.muzeibasket">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".Application.MyApplication"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher_round"
