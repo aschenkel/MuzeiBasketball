@@ -3,7 +3,7 @@ package com.schenkel.axel.muzeibasket;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.schenkel.axel.muzeibasket.DataAccess.SharedPreferencesService;
+import com.schenkel.axel.muzeibasket.DataAccess.Implementations.SharedPreferencesService;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -16,8 +16,6 @@ import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
 
  public class CacheImageService extends AsyncTask<String, Void, Bitmap> {
 
-        public static final String FILENAME = "NBA_MUZEI_IMAGE";
-
         BitmapUtils bitmapUtils;
         Context context;
 
@@ -30,7 +28,6 @@ import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
         protected Bitmap doInBackground(String... params) {
             String urlAddress = params[0];
             return ConvertURLtoBitmap(urlAddress);
-
         }
 
         private Bitmap ConvertURLtoBitmap(String urlAddress)
@@ -48,8 +45,6 @@ import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
         protected void onPostExecute(Bitmap bitmap) {
             bitmapUtils.SaveBitmapToPath(bitmap,getPath());
         }
-
-
 
     }
 

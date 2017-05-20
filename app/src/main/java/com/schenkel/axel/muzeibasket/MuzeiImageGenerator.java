@@ -10,16 +10,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
-import com.schenkel.axel.muzeibasket.DataAccess.FirebaseService;
-import com.schenkel.axel.muzeibasket.DataAccess.SharedPreferencesService;
-import com.schenkel.axel.muzeibasket.ImageServices.CacheImageService;
-import com.schenkel.axel.muzeibasket.Permissions.AskForPermissionsActivity;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;
+import com.schenkel.axel.muzeibasket.Application.MyApplication;
+import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.LocalDBService;
+import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.RemoteDBService;
+import com.schenkel.axel.muzeibasket.ImageServices.CacheImageService;
+import com.schenkel.axel.muzeibasket.Permissions.AskForPermissionsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -28,15 +31,16 @@ import rx.schedulers.Schedulers;
 
 public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
-
-    private static final int UPDATE_IMAGE_TIME_MILLIS =  24 * 60 * 60 * 1000; //every day
+    private static final int UPDATE_IMAGE_TIME_MILLIS =  10 * 1000; //every day
     private static final int NO_INTERNET_TIME_MILLIS =  5 * 60 * 1000; //every 5 minutes
     private static final int SAVE_TO_GALLERY_COMMAND_ID =  12345;
-    private static final String NAME = "NBAMuzei";
+    private static final String NAME = "MuzeiBasketball";
     Subscription subscription;
     CacheImageService cacheImageService;
-    SharedPreferencesService sharedPreferencesService;
-    FirebaseService firebaseService;
+    @Inject
+    LocalDBService localDBService;
+    @Inject
+    RemoteDBService remoteDBService;
 
     public MuzeiImageGenerator() {
         super( NAME );
@@ -57,8 +61,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     private void InstanceServices(){
         cacheImageService = new CacheImageService(getApplicationContext());
-        sharedPreferencesService = new SharedPreferencesService(getApplicationContext());
-        firebaseService = new FirebaseService();
+        MyApplication.injectLocalAndRemoteDB(this).inject(this);
     }
 
 
@@ -75,25 +78,25 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     private void updateImage() {
         ReScheduleUpdate(UPDATE_IMAGE_TIME_MILLIS);      //Done before updating to avoid some GooglePlayServices issues on some devices
-        String nextId = sharedPreferencesService.GetNextID();
+        String nextId = localDBService.GetNextID();
         GetNextImageFromFirebase(nextId);
     }
 
     public void GetNextImageFromFirebase(String imageId) {
-        subscription = firebaseService.GetNextImage(imageId)
+        subscription = remoteDBService.GetNextImage(imageId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(throwable -> FirebaseError())
+                .doOnError(throwable -> RemoteDBError())
                 .subscribe(this::OnCompleted);
     }
 
     public void OnCompleted(NBAImage image){
         if (image != null) {
-            setMuzeiImage(image);
             CacheImage(image);
+            setMuzeiImage(image);
         } else {
-            sharedPreferencesService.RestartID();
-            FirebaseError();
+            localDBService.RestartID();
+            RemoteDBError();
         }
     }
 
@@ -109,7 +112,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
                 .build() );
     }
 
-    private void FirebaseError() {
+    private void RemoteDBError() {
         unscheduleUpdate();
         ReScheduleUpdate(NO_INTERNET_TIME_MILLIS);
     }

@@ -27,20 +27,26 @@ public class AskForPermissionsActivity extends Activity {
     private void AskForWriteStoragePermission(){
         int permission = ContextCompat.checkSelfPermission(AskForPermissionsActivity.this,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permission != PackageManager.PERMISSION_GRANTED) {
+        if (permission == PackageManager.PERMISSION_GRANTED) {
+            //Permission already granted
+            OnPermissionGranted();
+        }else{
             //Request permission
             ActivityCompat.requestPermissions(AskForPermissionsActivity.this,
                     new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-        }else{
-            //Permission already granted
-            OnPermissionGranted();
         }
+    }
+
+    private void OnPermissionDenied() {
+        ShowMessage(getString(R.string.permission_denied));
+        finish();
     }
 
     private void OnPermissionGranted() {
        ShowMessage(getString(R.string.image_saved));
-        new SaveImageToGalleryService().AddImageToGallery(getBaseContext());
+        new SaveImageToGalleryService().AddImageToGallery(this);
+        finish();
     }
 
 
@@ -55,10 +61,9 @@ public class AskForPermissionsActivity extends Activity {
                     OnPermissionGranted();
                 } else {
                     //Permission denied
-                    ShowMessage(getString(R.string.permission_denied));
+                   OnPermissionDenied();
                 }
-                finish();
-                return;
+
             }
         }
     }

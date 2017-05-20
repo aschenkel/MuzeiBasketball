@@ -8,13 +8,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static com.schenkel.axel.muzeibasket.ImageServices.CacheImageService.FILENAME;
-
 /**
  * Created by axel on 15/05/17.
  */
 
 public class BitmapUtils {
+
+    final String FILENAME = "BASKET_MUZEI";
 
     public static String getPath(){
         return Environment.getExternalStorageDirectory().toString();

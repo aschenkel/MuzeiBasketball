@@ -14,7 +14,7 @@ import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
 public class SaveImageToGalleryService {
     public void AddImageToGallery(Context context){
         Bitmap bitmap = new BitmapUtils().GetBitmapFromPath(getPath());
-        MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap,"NBA Muzei", "");
+        MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap,"MuzeiBasketball", "");
         OpenGallery(context);
     }
 

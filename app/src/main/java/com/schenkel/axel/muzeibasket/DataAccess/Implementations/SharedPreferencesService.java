@@ -1,13 +1,15 @@
-package com.schenkel.axel.muzeibasket.DataAccess;
+package com.schenkel.axel.muzeibasket.DataAccess.Implementations;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.LocalDBService;
 
 /**
  * Created by axel on 08/05/17.
  */
 
-public class SharedPreferencesService {
+public class SharedPreferencesService implements LocalDBService {
     private static final int START_ID_VALUE = 0;
     private static final int MODE = 0;
     private static final String SHARE_PREFERENCES_NAME = "SharePref";
@@ -18,6 +20,7 @@ public class SharedPreferencesService {
         this.context = context;
     }
 
+    @Override
     public String GetNextID(){
         SharedPreferences prefs = context.getSharedPreferences(SHARE_PREFERENCES_NAME,MODE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -27,6 +30,7 @@ public class SharedPreferencesService {
         return String.valueOf(CurrentID);
     }
 
+    @Override
     public int RestartID(){
         SharedPreferences prefs = context.getSharedPreferences(SHARE_PREFERENCES_NAME,MODE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -35,6 +39,7 @@ public class SharedPreferencesService {
         return START_ID_VALUE;
     }
 
+    @Override
     public int ReadSharedPrefID(){
         SharedPreferences prefs = context.getSharedPreferences(SHARE_PREFERENCES_NAME,MODE);
         int ID = prefs.getInt(ID_TAG, START_ID_VALUE);
