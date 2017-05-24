@@ -22,13 +22,13 @@ public class UpdateImageTest {
     String imageIdTest="3";
     @Mock
     RemoteDBService remoteDBService;
-    NBAImage nextImage;
+    Image nextImage;
 
 
     @Before
     public void before() throws Exception {
         InitMocks();
-        nextImage = new NBAImage("url","name","descr");
+        nextImage = new Image("url","name","descr");
 
     }
 
@@ -40,7 +40,7 @@ public class UpdateImageTest {
     @Test
     public void GetNextImageFromFirebaseSuccess() throws Exception {
         when(remoteDBService.GetNextImage(imageIdTest)).thenReturn(Observable.just(nextImage));
-        TestSubscriber<NBAImage> testSubscriber = new TestSubscriber<>();
+        TestSubscriber<Image> testSubscriber = new TestSubscriber<>();
         remoteDBService.GetNextImage(imageIdTest).subscribe(testSubscriber);
         testSubscriber.assertValue(nextImage);
     }
@@ -49,7 +49,7 @@ public class UpdateImageTest {
     public void GetNextImageFromFirebaseError() throws Exception {
         RxFirebaseDataException ex = new RxFirebaseDataException(DatabaseError.fromException(new Exception()));
         when(remoteDBService.GetNextImage(imageIdTest)).thenReturn(Observable.error(ex));
-        TestSubscriber<NBAImage> testSubscriber = new TestSubscriber<>();
+        TestSubscriber<Image> testSubscriber = new TestSubscriber<>();
         remoteDBService.GetNextImage(imageIdTest).subscribe(testSubscriber);
         testSubscriber.assertError(ex);
     }

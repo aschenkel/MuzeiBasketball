@@ -1,6 +1,6 @@
 package com.schenkel.axel.muzeibasket.DataAccess.Interfaces;
 
-import com.schenkel.axel.muzeibasket.NBAImage;
+import com.schenkel.axel.muzeibasket.Image;
 
 import rx.Observable;
 
@@ -9,5 +9,5 @@ import rx.Observable;
  */
 
 public interface RemoteDBService {
-    Observable<NBAImage> GetNextImage(String imageId);
+    Observable<Image> GetNextImage(String imageId);
 }

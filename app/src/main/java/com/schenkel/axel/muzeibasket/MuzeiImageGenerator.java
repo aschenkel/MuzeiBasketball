@@ -89,7 +89,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
                 .subscribe(this::OnCompleted);
     }
 
-    public void OnCompleted(NBAImage image){
+    public void OnCompleted(Image image){
         if (image != null) {
             CacheImage(image);
             setMuzeiImage(image);
@@ -99,11 +99,11 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         }
     }
 
-    private void CacheImage(NBAImage image) {
+    private void CacheImage(Image image) {
         cacheImageService.execute(image.getUrl());                     //To be able to save it to Gallery later
     }
 
-    private void setMuzeiImage(NBAImage img) {
+    private void setMuzeiImage(Image img) {
         publishArtwork(new Artwork.Builder()
                 .title(img.getName())
                 .byline(img.getDescription())
