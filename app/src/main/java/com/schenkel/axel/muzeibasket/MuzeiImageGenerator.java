@@ -6,9 +6,11 @@ package com.schenkel.axel.muzeibasket;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Environment;
 
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
@@ -16,9 +18,13 @@ import com.google.android.apps.muzei.api.UserCommand;
 import com.schenkel.axel.muzeibasket.Application.MyApplication;
 import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.LocalDBService;
 import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.RemoteDBService;
+import com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils;
 import com.schenkel.axel.muzeibasket.ImageServices.CacheImageService;
 import com.schenkel.axel.muzeibasket.Permissions.AskForPermissionsActivity;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +33,8 @@ import javax.inject.Inject;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
 
 
 public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
@@ -127,16 +135,19 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
         super.onCustomCommand(id);
         switch (id) {
             case SAVE_TO_GALLERY_COMMAND_ID:
-                LaunchPermissionActivity();
+                ShareItem();
                 break;
         }
 
     }
 
-    private void LaunchPermissionActivity() {
-        Intent permissionIntent = new Intent(this, AskForPermissionsActivity.class);
-        permissionIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(permissionIntent);
+    private void ShareItem(){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("image/png");
+        i.putExtra(Intent.EXTRA_STREAM, new BitmapUtils().getLocalBitmapUri(getApplicationContext()));
+        Intent chooserIntent = Intent.createChooser(i, "Share images to..");
+        chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(chooserIntent);
     }
 
 

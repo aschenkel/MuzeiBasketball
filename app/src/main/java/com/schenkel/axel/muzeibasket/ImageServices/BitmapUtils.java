@@ -1,7 +1,9 @@
 package com.schenkel.axel.muzeibasket.ImageServices;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Environment;
 
 import java.io.File;
@@ -16,8 +18,8 @@ public class BitmapUtils {
 
     final String FILENAME = "BASKET_MUZEI";
 
-    public static String getPath(){
-        return Environment.getExternalStorageDirectory().toString();
+    public static String getPath(Context context){
+        return context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath();
     }
 
     public boolean SaveBitmapToPath(Bitmap bitmap,String path)
@@ -42,6 +44,25 @@ public class BitmapUtils {
         }
         return true;
     }
+
+    public boolean cacheBitmapFromUri(Bitmap bmp, Context context) {
+        try {
+            File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image.png");
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public Uri getLocalBitmapUri(Context context){
+        File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image.png");
+        return Uri.fromFile(file);
+    }
+
 
     public Bitmap GetBitmapFromPath(String path){
         BitmapFactory.Options options = new BitmapFactory.Options();

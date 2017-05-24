@@ -43,7 +43,7 @@ import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            bitmapUtils.SaveBitmapToPath(bitmap,getPath());
+            bitmapUtils.cacheBitmapFromUri(bitmap,context);
         }
 
     }
