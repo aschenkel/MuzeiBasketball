@@ -8,8 +8,6 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import java.net.URL;
 
-import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
-
 /**
  * Created by axel on 09/05/17.
  */
@@ -43,7 +41,7 @@ import static com.schenkel.axel.muzeibasket.ImageServices.BitmapUtils.getPath;
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            bitmapUtils.cacheBitmapFromUri(bitmap,context);
+            bitmapUtils.cacheBitmapToUri(bitmap,context);
         }
 
     }

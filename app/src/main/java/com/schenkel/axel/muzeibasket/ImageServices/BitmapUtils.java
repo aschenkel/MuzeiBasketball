@@ -16,38 +16,11 @@ import java.io.IOException;
 
 public class BitmapUtils {
 
-    final String FILENAME = "BASKET_MUZEI";
+    final String FILENAME = "BASKET_MUZEI.png";
 
-    public static String getPath(Context context){
-        return context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath();
-    }
-
-    public boolean SaveBitmapToPath(Bitmap bitmap,String path)
-    {
-        FileOutputStream out = null;
+    public boolean cacheBitmapToUri(Bitmap bmp, Context context) {
         try {
-            File file = new File(path, FILENAME);
-            out = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean cacheBitmapFromUri(Bitmap bmp, Context context) {
-        try {
-            File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image.png");
+            File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FILENAME);
             FileOutputStream out = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.close();
@@ -58,17 +31,8 @@ public class BitmapUtils {
         return true;
     }
 
-    public Uri getLocalBitmapUri(Context context){
-        File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image.png");
+    public Uri getBitmapFromUri(Context context){
+        File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FILENAME);
         return Uri.fromFile(file);
-    }
-
-
-    public Bitmap GetBitmapFromPath(String path){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        File file = new File(path, FILENAME);
-        return BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-
     }
 }
