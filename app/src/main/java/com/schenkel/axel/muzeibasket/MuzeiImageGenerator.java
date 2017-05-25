@@ -4,9 +4,6 @@ package com.schenkel.axel.muzeibasket;
  * Created by axel on 04/05/17.
  */
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 
 import com.google.android.apps.muzei.api.Artwork;
@@ -17,6 +14,7 @@ import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.LocalDBService;
 import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.RemoteDBService;
 import com.schenkel.axel.muzeibasket.ImageServices.CacheImageService;
 import com.schenkel.axel.muzeibasket.ImageServices.ShareImageService;
+import com.schenkel.axel.muzeibasket.NetworkUtils.Connectivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,16 +28,18 @@ import rx.schedulers.Schedulers;
 
 public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
-    private static final int UPDATE_IMAGE_TIME_MILLIS =  24 * 60 * 60 * 1000; //every day
+    private static final int UPDATE_IMAGE_TIME_MILLIS = 24 * 60 * 60 * 1000; //every day
     private static final int NO_INTERNET_TIME_MILLIS =  5 * 60 * 1000; //every 5 minutes
     private static final int SHARE_COMMAND_ID =  12345;
     private static final String NAME = "MuzeiBasketball";
     Subscription subscription;
     CacheImageService cacheImageService;
+    Connectivity connectivity;
     @Inject
     LocalDBService localDBService;
     @Inject
     RemoteDBService remoteDBService;
+
 
     public MuzeiImageGenerator() {
         super( NAME );
@@ -59,6 +59,7 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
     }
 
     private void InstanceServices(){
+        connectivity = new Connectivity();
         cacheImageService = new CacheImageService(getApplicationContext());
         MyApplication.getInstance().injectLocalAndRemoteDB(this).inject(this);
     }
@@ -66,12 +67,13 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
 
     @Override
     protected void onTryUpdate( int reason ) throws RetryException {
-        if(isNetworkAvailable()) {
+        if(connectivity.isConnected(getApplicationContext())) {
             updateImage();
         }
         else{
             ReScheduleUpdate(NO_INTERNET_TIME_MILLIS);
         }
+
     }
 
 
@@ -130,12 +132,6 @@ public class MuzeiImageGenerator extends RemoteMuzeiArtSource {
                 break;
         }
 
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
 
