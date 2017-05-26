@@ -32,11 +32,9 @@ public class Connectivity {
         return false;
     }
 
-    private boolean isAirplaneModeOn(Context context) {
-
+    public boolean isAirplaneModeOn(Context context) {
         return Settings.System.getInt(context.getContentResolver(),
                 AIRPLANE_MODE_ON, 0) != 0;
-
     }
     /**
      * Check if the connection is fast
@@ -45,7 +43,7 @@ public class Connectivity {
      * @param subType
      * @return
      */
-    private boolean isConnectionFast(int type, int subType) {
+    public boolean isConnectionFast(int type, int subType) {
         if (type == ConnectivityManager.TYPE_WIFI) {
             return true;
         } else if (type == ConnectivityManager.TYPE_MOBILE) {
