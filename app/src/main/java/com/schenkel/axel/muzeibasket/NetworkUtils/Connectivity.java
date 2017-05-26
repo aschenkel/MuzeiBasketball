@@ -43,7 +43,7 @@ public class Connectivity {
      * @param subType
      * @return
      */
-    public boolean isConnectionFast(int type, int subType) {
+    private boolean isConnectionFast(int type, int subType) {
         if (type == ConnectivityManager.TYPE_WIFI) {
             return true;
         } else if (type == ConnectivityManager.TYPE_MOBILE) {
