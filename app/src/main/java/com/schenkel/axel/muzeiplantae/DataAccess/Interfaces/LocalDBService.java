@@ -1,4 +1,4 @@
-package com.schenkel.axel.muzeibasket.DataAccess.Interfaces;
+package com.schenkel.axel.muzeiplantae.DataAccess.Interfaces;
 
 /**
  * Created by axel on 20/05/17.

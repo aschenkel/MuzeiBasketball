@@ -1,6 +1,6 @@
-package com.schenkel.axel.muzeibasket.DataAccess.Interfaces;
+package com.schenkel.axel.muzeiplantae.DataAccess.Interfaces;
 
-import com.schenkel.axel.muzeibasket.Image;
+import com.schenkel.axel.muzeiplantae.Image;
 
 import rx.Observable;
 

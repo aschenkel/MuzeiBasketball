@@ -1,8 +1,8 @@
-package com.schenkel.axel.muzeibasket.DataAccess.Dagger;
+package com.schenkel.axel.muzeiplantae.DataAccess.Dagger;
 
 import android.content.Context;
 
-import com.schenkel.axel.muzeibasket.MuzeiImageGenerator;
+import com.schenkel.axel.muzeiplantae.MuzeiImageGenerator;
 
 
 import dagger.Component;

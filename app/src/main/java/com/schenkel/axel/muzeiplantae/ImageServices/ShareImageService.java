@@ -1,4 +1,4 @@
-package com.schenkel.axel.muzeibasket.ImageServices;
+package com.schenkel.axel.muzeiplantae.ImageServices;
 
 import android.content.Context;
 import android.content.Intent;

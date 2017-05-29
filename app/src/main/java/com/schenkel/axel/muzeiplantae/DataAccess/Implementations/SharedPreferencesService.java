@@ -1,9 +1,9 @@
-package com.schenkel.axel.muzeibasket.DataAccess.Implementations;
+package com.schenkel.axel.muzeiplantae.DataAccess.Implementations;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.LocalDBService;
+import com.schenkel.axel.muzeiplantae.DataAccess.Interfaces.LocalDBService;
 
 /**
  * Created by axel on 08/05/17.

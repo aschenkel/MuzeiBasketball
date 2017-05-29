@@ -1,7 +1,7 @@
-package com.schenkel.axel.muzeibasket.DataAccess.Implementations;
+package com.schenkel.axel.muzeiplantae.DataAccess.Implementations;
 
-import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.RemoteDBService;
-import com.schenkel.axel.muzeibasket.Image;
+import com.schenkel.axel.muzeiplantae.DataAccess.Interfaces.RemoteDBService;
+import com.schenkel.axel.muzeiplantae.Image;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kelvinapps.rxfirebase.RxFirebaseDatabase;

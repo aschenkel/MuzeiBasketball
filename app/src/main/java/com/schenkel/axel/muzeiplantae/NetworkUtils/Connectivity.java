@@ -1,4 +1,4 @@
-package com.schenkel.axel.muzeibasket.NetworkUtils;
+package com.schenkel.axel.muzeiplantae.NetworkUtils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

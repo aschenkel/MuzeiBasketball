@@ -1,11 +1,11 @@
-package com.schenkel.axel.muzeibasket.DataAccess.Dagger;
+package com.schenkel.axel.muzeiplantae.DataAccess.Dagger;
 
 import android.content.Context;
 
-import com.schenkel.axel.muzeibasket.DataAccess.Implementations.FirebaseService;
-import com.schenkel.axel.muzeibasket.DataAccess.Implementations.SharedPreferencesService;
-import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.LocalDBService;
-import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.RemoteDBService;
+import com.schenkel.axel.muzeiplantae.DataAccess.Implementations.FirebaseService;
+import com.schenkel.axel.muzeiplantae.DataAccess.Implementations.SharedPreferencesService;
+import com.schenkel.axel.muzeiplantae.DataAccess.Interfaces.LocalDBService;
+import com.schenkel.axel.muzeiplantae.DataAccess.Interfaces.RemoteDBService;
 
 import dagger.Module;
 import dagger.Provides;

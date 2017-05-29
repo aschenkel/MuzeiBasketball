@@ -1,8 +1,8 @@
-package com.schenkel.axel.muzeibasket;
+package com.schenkel.axel.muzeiplantae;
 
 import com.google.firebase.database.DatabaseError;
 import com.kelvinapps.rxfirebase.exceptions.RxFirebaseDataException;
-import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.RemoteDBService;
+import com.schenkel.axel.muzeiplantae.DataAccess.Interfaces.RemoteDBService;
 
 import org.junit.Before;
 import org.junit.Test;

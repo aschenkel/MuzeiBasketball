@@ -1,9 +1,9 @@
-package com.schenkel.axel.muzeibasket;
+package com.schenkel.axel.muzeiplantae;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.schenkel.axel.muzeibasket.DataAccess.Implementations.SharedPreferencesService;
+import com.schenkel.axel.muzeiplantae.DataAccess.Implementations.SharedPreferencesService;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,9 +1,9 @@
-package com.schenkel.axel.muzeibasket.Application;
+package com.schenkel.axel.muzeiplantae.Application;
 
 import android.app.Application;
 
-import com.schenkel.axel.muzeibasket.DataAccess.Dagger.DBsComponent;
-import com.schenkel.axel.muzeibasket.MuzeiImageGenerator;
+import com.schenkel.axel.muzeiplantae.DataAccess.Dagger.DBsComponent;
+import com.schenkel.axel.muzeiplantae.MuzeiImageGenerator;
 
 /**
  * Created by axel on 20/05/17.

@@ -1,8 +1,7 @@
-package com.schenkel.axel.muzeibasket.ImageServices;
+package com.schenkel.axel.muzeiplantae.ImageServices;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 

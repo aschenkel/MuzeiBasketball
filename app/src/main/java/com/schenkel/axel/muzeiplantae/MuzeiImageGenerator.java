@@ -1,4 +1,4 @@
-package com.schenkel.axel.muzeibasket;
+package com.schenkel.axel.muzeiplantae;
 
 /**
  * Created by axel on 04/05/17.
@@ -9,12 +9,12 @@ import android.net.Uri;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;
-import com.schenkel.axel.muzeibasket.Application.MyApplication;
-import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.LocalDBService;
-import com.schenkel.axel.muzeibasket.DataAccess.Interfaces.RemoteDBService;
-import com.schenkel.axel.muzeibasket.ImageServices.CacheImageService;
-import com.schenkel.axel.muzeibasket.ImageServices.ShareImageService;
-import com.schenkel.axel.muzeibasket.NetworkUtils.Connectivity;
+import com.schenkel.axel.muzeiplantae.Application.MyApplication;
+import com.schenkel.axel.muzeiplantae.DataAccess.Interfaces.LocalDBService;
+import com.schenkel.axel.muzeiplantae.DataAccess.Interfaces.RemoteDBService;
+import com.schenkel.axel.muzeiplantae.ImageServices.CacheImageService;
+import com.schenkel.axel.muzeiplantae.ImageServices.ShareImageService;
+import com.schenkel.axel.muzeiplantae.NetworkUtils.Connectivity;
 
 import java.util.ArrayList;
 import java.util.List;

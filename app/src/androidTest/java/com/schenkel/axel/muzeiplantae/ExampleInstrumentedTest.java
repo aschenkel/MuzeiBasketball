@@ -1,4 +1,4 @@
-package com.schenkel.axel.muzeibasket;
+package com.schenkel.axel.muzeiplantae;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
