@@ -21,7 +21,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "com.schenkel.axel.muzeibasket"
+        applicationId "com.schenkel.axel.muzeiplantae"
         minSdkVersion 23
         targetSdkVersion 23
         versionCode 1
