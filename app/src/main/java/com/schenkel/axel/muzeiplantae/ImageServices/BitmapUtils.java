@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,12 +16,11 @@ import java.io.IOException;
 
 public class BitmapUtils {
 
-    final String FILENAME = "BASKET_MUZEI.png";
+    final String FILENAME = "PLANTAE_MUZEI.png";
 
-    public boolean cacheBitmapToUri(Bitmap bmp, Context context) {
+    public boolean cacheBitmap(Bitmap bmp, Context context) {
         try {
-            File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FILENAME);
-            FileOutputStream out = new FileOutputStream(file);
+            FileOutputStream out = new FileOutputStream(getFile(context));
             bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.close();
         } catch (IOException e) {
@@ -30,8 +30,12 @@ public class BitmapUtils {
         return true;
     }
 
-    public Uri getBitmapFromUri(Context context){
-        File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FILENAME);
-        return Uri.fromFile(file);
+    public Uri getBitmapUri(Context context){
+        return Uri.fromFile(getFile(context));
+    }
+
+    @NonNull
+    private File getFile(Context context) {
+        return new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), FILENAME);
     }
 }

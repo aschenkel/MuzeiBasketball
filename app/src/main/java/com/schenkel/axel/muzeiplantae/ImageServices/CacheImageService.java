@@ -41,7 +41,7 @@ import java.net.URL;
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            bitmapUtils.cacheBitmapToUri(bitmap,context);
+            bitmapUtils.cacheBitmap(bitmap,context);
         }
 
     }
