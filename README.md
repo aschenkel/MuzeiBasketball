@@ -1,4 +1,4 @@
-Extension for Muzei Live Wallpaper (http://get.muzei.co)
+Extension for Muzei Live Wallpaper (http://get.muzei.co).
 Muzei is a live wallpaper that gently refreshes your home screen each day with famous works of art. 
 
 This app uses Muzei API to create a plugin using plants and threes as a source showing both its scientific and common name.
